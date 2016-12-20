@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 # Set stimulus parameters
-velStim = -2  #m/s velocity of stimulus
+velStim = -0.5  #m/s velocity of stimulus
 lStim = 0.1 #m  half length of stimulus
 xStart = 0.12 #m start approach distance away from specimen 
 
@@ -31,7 +31,7 @@ def createImage(xFov, yFov , angPix, scaleRes):
 	img = np.ones((hImage,wImage,3), np.uint8)*backgroundColor
 	return img, outHeight, outWidth, hImage, wImage
 
-img, outHeight, outWidth, hImage, wImage = createImage(xFov, yFov, angPix, scaleRes)
+
 #Initiate Parameters
 
 dt = 1./fps 
@@ -51,14 +51,36 @@ def getParamters(velStim, tStart , tEnd, dt, lStim, angPix ):
 
 	return t, lPix , thetaRun, xRun
 
+img, outHeight, outWidth, hImage, wImage = createImage(xFov, yFov, angPix, scaleRes)
 tStimulus, lStimulus, theta, xRun  = getParamters(velStim, tStart, tEnd, dt, lStim, angPix)
 
 # plt.plot(tStimulus, lStimulus)
 # plt.show()
 # print tStimulus
 
+# def writerImage(fps, outWidth. outHeight, wImage, hImage, dt, lStimulus, img)
 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-writerOut = cv2.VideoWriter('stimOmmatidia.avi', fourcc, fps , (outWidth, outHeight))
+writerOut = cv2.VideoWriter('stimOmmatidia3.avi', fourcc, fps , (outWidth, outHeight))
+
+# Put in some frames at the beginning:
+
+numFrames = 1000
+firstFrame = 0
+lastFrame = len(lStimulus)-1
+
+for i in range(1,numFrames):
+	length = lStimulus[firstFrame] 
+	xTopLeft1 = int(round(wImage/2 - (length/2)))
+	yTopLeft1 = int(round(hImage/2 - (length /2)))
+	xBottomRight1 = int(round(wImage/2 + (length/2)))
+	yBottomRight1 = int(round(hImage/2 + length/ 2))
+	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),(0,0,0), thickness = cv2.FILLED )
+	#cv2.imshow('figureSquare1', img)
+	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
+	cv2.waitKey(int(math.ceil(dt)))
+	#number = number +1
+	writerOut.write(imgResize)
+
 number = 1
 for i in np.nditer(lStimulus) :
 	xTopLeft1 = int(round(wImage/2 - (i/2)))
@@ -70,8 +92,28 @@ for i in np.nditer(lStimulus) :
 	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
 	cv2.waitKey(int(math.ceil(dt)))
 	number = number +1
-	#cv2.imwrite("./Images/TestImage"+ str(number) +".jpg", img) 
 	writerOut.write(imgResize)
+
+
+print len(lStimulus)
+print lastFrame
+
+for i in range(1,numFrames):
+	length = lStimulus[lastFrame] 
+	xTopLeft1 = int(round(wImage/2 - (length/2)))
+	yTopLeft1 = int(round(hImage/2 - (length /2)))
+	xBottomRight1 = int(round(wImage/2 + (length/2)))
+	yBottomRight1 = int(round(hImage/2 + length/ 2))
+	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),(0,0,0), thickness = cv2.FILLED )
+	#cv2.imshow('figureSquare1', img)
+	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
+	cv2.waitKey(int(math.ceil(dt)))
+	#number = number +1
+	writerOut.write(imgResize)
+
+
+
+
 writerOut.release()
 
 cv2.destroyAllWindows()
