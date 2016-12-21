@@ -15,10 +15,11 @@ yFov = 180 # degrees, fov locust elevation
 angPix = 2.33 # deg/pixel interommatidial angle specimen
 
 #Set parameters image
-
-backgroundColor = 255 # 0 black, 255 white 
-scaleRes = 1  # resolution scale, to downsample later
+scaleCon = (100,100,100)
+backgroundColor = 255  # 0 black, 255 white 
+scaleRes = 10  # resolution scale, to downsample later
 fps = 200 # Frame Resolution
+numFrames = 10 # Number of repetition frames at end and beginning 
 
 #Configure Image 
 
@@ -60,43 +61,39 @@ tStimulus, lStimulus, theta, xRun  = getParamters(velStim, tStart, tEnd, dt, lSt
 
 # def writerImage(fps, outWidth. outHeight, wImage, hImage, dt, lStimulus, img)
 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-writerOut = cv2.VideoWriter('stimOmmatidia3.avi', fourcc, fps , (outWidth, outHeight))
+writerOut = cv2.VideoWriter('stim_fps_'+str(fps) +'_v_' +str(velStim)+'_l_'+str(lStim)+ '_x_'+ str(xStart)+ '_Sc_'+str(scaleCon)+'.avi', fourcc, fps , (outWidth, outHeight))
 
 # Put in some frames at the beginning:
 
-numFrames = 1000
-firstFrame = 0
-lastFrame = len(lStimulus)-1
 
+# Repetition first frame
+firstFrame = 0
 for i in range(1,numFrames):
 	length = lStimulus[firstFrame] 
 	xTopLeft1 = int(round(wImage/2 - (length/2)))
 	yTopLeft1 = int(round(hImage/2 - (length /2)))
 	xBottomRight1 = int(round(wImage/2 + (length/2)))
 	yBottomRight1 = int(round(hImage/2 + length/ 2))
-	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),(0,0,0), thickness = cv2.FILLED )
+	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),scaleCon, thickness = cv2.FILLED )
 	#cv2.imshow('figureSquare1', img)
 	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
 	cv2.waitKey(int(math.ceil(dt)))
-	#number = number +1
 	writerOut.write(imgResize)
 
-number = 1
+# Looming stimulus
 for i in np.nditer(lStimulus) :
 	xTopLeft1 = int(round(wImage/2 - (i/2)))
 	yTopLeft1 = int(round(hImage/2 - (i /2)))
 	xBottomRight1 = int(round(wImage/2 + (i/2)))
 	yBottomRight1 = int(round(hImage/2 + i/ 2))
-	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),(0,0,0), thickness = cv2.FILLED )
+	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),scaleCon, thickness = cv2.FILLED )
 	#cv2.imshow('figureSquare1', img)
 	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
 	cv2.waitKey(int(math.ceil(dt)))
-	number = number +1
 	writerOut.write(imgResize)
 
-
-print len(lStimulus)
-print lastFrame
+# Repetition last frame
+lastFrame = len(lStimulus)-1
 
 for i in range(1,numFrames):
 	length = lStimulus[lastFrame] 
@@ -104,14 +101,11 @@ for i in range(1,numFrames):
 	yTopLeft1 = int(round(hImage/2 - (length /2)))
 	xBottomRight1 = int(round(wImage/2 + (length/2)))
 	yBottomRight1 = int(round(hImage/2 + length/ 2))
-	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),(0,0,0), thickness = cv2.FILLED )
+	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),scaleCon, thickness = cv2.FILLED )
 	#cv2.imshow('figureSquare1', img)
 	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
 	cv2.waitKey(int(math.ceil(dt)))
-	#number = number +1
 	writerOut.write(imgResize)
-
-
 
 
 writerOut.release()
