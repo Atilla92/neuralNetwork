@@ -18,10 +18,10 @@ fps = 200 # Frame Resolution
 numFrames = 10 # Number of repetition frames at end and beginning 
 # Set velocity 
 wVel = 0 #pix/second
-hVel = 0 # pix/second
+hVel = -1000 # pix/second
 ##################################
-wVelOp = -10 # pix/second
-hVelOp = -10 # pix/second
+wVelOp = 0 # pix/second
+hVelOp = 0 # pix/second
 
 #createImage(xFov, yFov , angPix, scaleRes)
 from ommatidiaStimulus import createImage
@@ -42,6 +42,7 @@ if hVel == 0 and wVel<0 :
 	w_t = np.arange(wTime,tEnd , dt )
 	wLength = np.multiply(w_t, wVel)
 	hLength = 0 * np.ones(len(h_t))
+	name='R'
 
 elif wVel == 0 and hVel<0:
 	wTime = wImage/hVel # second time of stimulus f(velocity)
@@ -50,7 +51,7 @@ elif wVel == 0 and hVel<0:
 	w_t = np.arange(wTime,tEnd , dt )
 	hLength = np.multiply(h_t, hVel)
 	wLength = 0 * np.ones(len(w_t))
-
+	name='U'
 
 
 elif wVel <0 and hVel<0:
@@ -60,8 +61,7 @@ elif wVel <0 and hVel<0:
 	w_t = np.arange(wTime,tEnd , dt )
 	hLength = np.multiply(h_t, hVel)
 	wLength = np.multiply(w_t, wVel)
-
-
+	name='RU'
 if hVelOp == 0 and wVelOp<0 :
 	
 	wTimeOp = wImage/wVelOp # second time of stimulus f(velocity)
@@ -70,7 +70,7 @@ if hVelOp == 0 and wVelOp<0 :
 	w_tOp = np.arange(wTimeOp,tEnd , dt )
 	wLengthOp = np.multiply(w_tOp, wVelOp)
 	hLengthOp = 0 * np.ones(len(h_tOp))
-
+	name2='L'
 elif wVelOp == 0 and hVelOp<0:
 	wTimeOp = wImage/hVelOp # second time of stimulus f(velocity)
 	hTimeOp = hImage/hVelOp #  ''
@@ -78,28 +78,28 @@ elif wVelOp == 0 and hVelOp<0:
 	w_tOp = np.arange(wTimeOp,tEnd , dt )
 	hLengthOp = np.multiply(h_tOp, hVelOp)
 	wLengthOp = 0 * np.ones(len(w_tOp))
-
+	name2='D'
 elif wVelOp == 0 and hVelOp == 0:
 	wLengthOp = 0 * np.ones(len(w_t))
 	hLengthOp = 0 * np.ones(len(h_t))
-
+	name2=''
 elif wVelOp<0 and hVelOp<0:
 	wTimeOp = wImage/wVelOp # second time of stimulus f(velocity)
-	hTimeOp = hImage/wVelOp #  ''
+	hTimeOp = hImage/hVelOp #  ''
 	h_tOp = np. arange(hTimeOp, tEnd, dt)
 	w_tOp = np.arange(wTimeOp,tEnd , dt )
 	hLengthOp = np.multiply(h_tOp, hVelOp)
 	wLengthOp = np.multiply(w_tOp, wVelOp)
+	name2='LD'
 
 if wVel == 0 and hVel == 0:
 	wLength = 0 * np.ones(len(w_tOp))
 	hLength = 0 * np.ones(len(h_tOp))
+	name=''
 
-#print len(hLength)
 
 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-#writerOut = cv2.VideoWriter('stim_fps_'+str(fps) +'_v_' +str(velStim)+'_l_'+str(lStim)+ '_x_'+ str(xStart)+ '_Sc_'+str(scaleCon)+'.avi', fourcc, fps , (outWidth, outHeight))
-writerOut = cv2.VideoWriter('stimBasil.avi', fourcc, fps , (outWidth, outHeight))
+writerOut = cv2.VideoWriter('stimBasil'+name+name2 + 'FAST_COL_'+ str(greyValue)+'.avi', fourcc, fps , (outWidth, outHeight))
 a = []
 for i in range(len(wLength)) :
 	xTopLeft1 = int(round(wLength[i]))
@@ -113,11 +113,8 @@ for i in range(len(wLength)) :
 	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
 	cv2.waitKey(int(math.ceil(dt)))
 	writerOut.write(imgResize)
-	a.append(xTopLeft1)
-	#print xTopLeft1
 
-# plt.plot(h_t, a)
-# plt.show()
+
 
 writerOut.release()
 
