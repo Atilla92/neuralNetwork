@@ -20,7 +20,7 @@ numFrames = 10 # Number of repetition frames at end and beginning
 wVel = 0 #pix/second
 hVel = -1000 # pix/second
 ##################################
-wVelOp = 0 # pix/second
+wVelOp = 0#1000 # pix/second
 hVelOp = 0 # pix/second
 
 #createImage(xFov, yFov , angPix, scaleRes)
@@ -42,7 +42,7 @@ if hVel == 0 and wVel<0 :
 	w_t = np.arange(wTime,tEnd , dt )
 	wLength = np.multiply(w_t, wVel)
 	hLength = 0 * np.ones(len(h_t))
-	name='R'
+	name='L'
 
 elif wVel == 0 and hVel<0:
 	wTime = wImage/hVel # second time of stimulus f(velocity)
@@ -61,16 +61,16 @@ elif wVel <0 and hVel<0:
 	w_t = np.arange(wTime,tEnd , dt )
 	hLength = np.multiply(h_t, hVel)
 	wLength = np.multiply(w_t, wVel)
-	name='RU'
-if hVelOp == 0 and wVelOp<0 :
-	
+	name='LU'
+
+if hVelOp == 0 and wVelOp<0 :	
 	wTimeOp = wImage/wVelOp # second time of stimulus f(velocity)
 	hTimeOp = hImage/wVelOp #  ''
 	h_tOp = np. arange(hTimeOp, tEnd, dt)
 	w_tOp = np.arange(wTimeOp,tEnd , dt )
 	wLengthOp = np.multiply(w_tOp, wVelOp)
 	hLengthOp = 0 * np.ones(len(h_tOp))
-	name2='L'
+	name2='R'
 elif wVelOp == 0 and hVelOp<0:
 	wTimeOp = wImage/hVelOp # second time of stimulus f(velocity)
 	hTimeOp = hImage/hVelOp #  ''
@@ -90,14 +90,18 @@ elif wVelOp<0 and hVelOp<0:
 	w_tOp = np.arange(wTimeOp,tEnd , dt )
 	hLengthOp = np.multiply(h_tOp, hVelOp)
 	wLengthOp = np.multiply(w_tOp, wVelOp)
-	name2='LD'
-
+	name2='RD'
+	print len(hLengthOp)
+	print len(wLengthOp)
 if wVel == 0 and hVel == 0:
 	wLength = 0 * np.ones(len(w_tOp))
 	hLength = 0 * np.ones(len(h_tOp))
 	name=''
+	print len(wLength)
+	print len(hLength)
 
-
+print name
+print name2
 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
 writerOut = cv2.VideoWriter('stimBasil'+name+name2 + 'FAST_COL_'+ str(greyValue)+'.avi', fourcc, fps , (outWidth, outHeight))
 a = []

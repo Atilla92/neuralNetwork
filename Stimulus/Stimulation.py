@@ -14,23 +14,23 @@ import matplotlib.pyplot as plt
 
 
 #Screen Dimensions ThinkPad
-hScreen = 17 # cm
-wScreen =  31 # cm
-hResoScreen = 1920 # pixels
-wResScreen = 1080 #[pixels]
-hPixRatio = hResoScreen / hScreen
-wPixRatio = wResScreen / wScreen
+# hScreen = 17 # cm
+# wScreen =  31 # cm
+# hResoScreen = 1920 # pixels
+# wResScreen = 1080 #[pixels]
+# hPixRatio = hResoScreen / hScreen
+# wPixRatio = wResScreen / wScreen
 
 
-# Set image dimensions
-upScale = 10
-outWidth = 736
-outHeight = 500
-lSquare=5000   # cm 
-vApproach = 0.5 # Velocity approach m/s
-startPos= 12 # Start position approach cm
-backgroundColor = 255
-fps = 200  # frame rate Hz
+# # Set image dimensions
+# upScale = 10
+# outWidth = 736
+# outHeight = 500
+# lSquare=5000   # cm 
+# vApproach = 0.5 # Velocity approach m/s
+# startPos= 12 # Start position approach cm
+# backgroundColor = 255
+# fps = 200  # frame rate Hz
 
 
 #cImage = (wImage/2, hImage/2)
@@ -40,11 +40,15 @@ fps = 200  # frame rate Hz
 # Must convert to picels of the screen 
 # Distance should be 12 cm, obeject size 6-14 cm, v 2-10m/s
  # cm to pixel, still should adjust pixels for height and width, but are similar
-lhSquare = hPixRatio * upScale * lSquare
-lwSquare = wPixRatio * upScale * lSquare
+# lhSquare = hPixRatio * upScale * lSquare
+# lwSquare = wPixRatio * upScale * lSquare
+# wImage= outWidth*upScale 
+# hImage = outHeight * upScale
+
+
+
 wImage= outWidth*upScale 
 hImage = outHeight * upScale
-
 #print type(lSquare, vSquare, xStart)
 
 #Set up stimulus graphics
