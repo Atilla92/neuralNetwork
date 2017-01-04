@@ -25,7 +25,15 @@ hVelOp = 0 # pix/second
 
 #createImage(xFov, yFov , angPix, scaleRes)
 from ommatidiaStimulus import createImage
-img, outHeight, outWidth, hImage, wImage = createImage(xFov, yFov, angPix, scaleRes)
+#img, outHeight, outWidth, hImage, wImage = createImage(xFov, yFov, angPix, scaleRes)
+
+#Set manually amount of pixels
+outHeight = 20
+outWidth = 20
+hImage = outHeight * scaleRes
+wImage = outWidth * scaleRes
+img = np.ones((hImage,wImage,3), np.uint8)*backgroundColor
+namePix = str(outHeight)
 
 # Estimate Parameters
 dt = 1./ fps
@@ -103,7 +111,7 @@ if wVel == 0 and hVel == 0:
 print name
 print name2
 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-writerOut = cv2.VideoWriter('stimBasil'+name+name2 + 'FAST_COL_'+ str(greyValue)+'.avi', fourcc, fps , (outWidth, outHeight))
+writerOut = cv2.VideoWriter('stimBasil'+name+name2 + 'FAST_COL_'+ str(greyValue)+'_Pix_' +namePix +'.avi', fourcc, fps , (outWidth, outHeight))
 a = []
 for i in range(len(wLength)) :
 	xTopLeft1 = int(round(wLength[i]))
