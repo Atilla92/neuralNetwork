@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE System PUBLIC '-//INI/iqr421' 'iqrSystem.dtd'>
+<System name="new system" author="atilla" syncPlots="false" port="54923" cylesPerSecond="1" id="L-3035-1483625611-1804289383" date="Thu Jan  5 15:13:31 2017&#xa;">
+    <Note></Note>
+    <Process enableModule="true" name="New Process 1" hostname="" port="54923" color="#FFFFFF" path="" id="L-3035-1483625614-846930886">
+        <Note></Note>
+        <DiagramIcon x="281" y="191" height="50" width="50"/>
+        <Group name="New Group 1" color="#FFFFFF" id="L-3035-1483625617-1681692777">
+            <Topology>
+                <TopologyRect cylinderHor="false" hcount="7" vcount="7" cylinderVert="false"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter name="excGain" value="1"/>
+                <Parameter name="inhGain" value="1"/>
+                <Parameter name="vmPrs" value="0"/>
+                <Parameter name="clipVm" value="false"/>
+                <Parameter name="vmMin" value="0"/>
+                <Parameter name="vmMax" value="1"/>
+                <Parameter name="probability" value="1"/>
+                <Parameter name="threshold" value="0"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon x="276" y="295" height="50" width="50"/>
+        </Group>
+        <Group name="New Group 2" color="#FFFFFF" id="L-3035-1483625627-1714636915">
+            <Topology>
+                <TopologyRect cylinderHor="false" hcount="7" vcount="7" cylinderVert="false"/>
+            </Topology>
+            <Neuron name="neuronSigmoid">
+                <Parameter name="excGain" value="1"/>
+                <Parameter name="inhGain" value="1"/>
+                <Parameter name="vmPrs" value="0"/>
+                <Parameter name="clipVm" value="false"/>
+                <Parameter name="vmMin" value="0"/>
+                <Parameter name="vmMax" value="1"/>
+                <Parameter name="midpoint" value="0"/>
+                <Parameter name="slope" value="1"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon x="496" y="302" height="50" width="50"/>
+        </Group>
+        <Group name="New Group 3" color="#FFFFFF" id="L-3035-1483625668-1653377373">
+            <Topology>
+                <TopologyRect cylinderHor="false" hcount="7" vcount="7" cylinderVert="false"/>
+            </Topology>
+            <Neuron name="neuronRandomSpike">
+                <Parameter name="probability" value="0.01"/>
+                <Parameter name="spkAmpl" value="1"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon x="139" y="314" height="50" width="50"/>
+        </Group>
+    </Process>
+    <Connection name="Connection New Group 1->New Group 2" source="L-3035-1483625617-1681692777" type="excitatory" target="L-3035-1483625627-1714636915" id="L-3035-1483625640-1957747793">
+        <Pattern>
+            <PatternMapped type="center">
+                <Region xstart="1" height="4" ystart="4" width="7"/>
+                <Region xstart="1" height="4" ystart="1" width="7"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect direction="RF" height="1" initialization_probability="1" width="5"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter name="weight" value="1"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="5"/>
+    </Connection>
+    <Connection name="Connection New Group 3->New Group 1" source="L-3035-1483625668-1653377373" type="excitatory" target="L-3035-1483625617-1681692777" id="L-3035-1483625672-859484421">
+        <Pattern>
+            <PatternMapped type="center">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect direction="PF" height="1" initialization_probability="1" width="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter name="weight" value="1"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="5"/>
+    </Connection>
+</System>
+
