@@ -17,7 +17,7 @@ scaleRes = 10  # resolution scale, to downsample later
 fps = 200 # Frame Resolution
 numFrames = 10 # Number of repetition frames at end and beginning 
 # Set velocity 
-wVel = 0 #pix/second
+wVel = -1000 #pix/second
 hVel = -1000 # pix/second
 ##################################
 wVelOp = 0#1000 # pix/second
@@ -25,14 +25,14 @@ hVelOp = 0 # pix/second
 
 #createImage(xFov, yFov , angPix, scaleRes)
 from ommatidiaStimulus import createImage
-#img, outHeight, outWidth, hImage, wImage = createImage(xFov, yFov, angPix, scaleRes)
+img, outHeight, outWidth, hImage, wImage = createImage(xFov, yFov, angPix, scaleRes)
 
 #Set manually amount of pixels
-outHeight = 20
-outWidth = 20
-hImage = outHeight * scaleRes
-wImage = outWidth * scaleRes
-img = np.ones((hImage,wImage,3), np.uint8)*backgroundColor
+# outHeight = 20
+# outWidth = 20
+# hImage = outHeight * scaleRes
+# wImage = outWidth * scaleRes
+# img = np.ones((hImage,wImage,3), np.uint8)*backgroundColor
 namePix = str(outHeight)
 
 # Estimate Parameters

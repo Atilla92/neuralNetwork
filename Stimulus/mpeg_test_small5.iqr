@@ -1,0 +1,1080 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE System PUBLIC '-//INI/iqr421' 'iqrSystem.dtd'>
+<System syncPlots="false" id="L-3415-1482226269-1804289383" author="basil" date="Tue Dec 20 10:31:09 2016&#xa;" cylesPerSecond="1" port="54923" name="new system">
+    <Note></Note>
+    <Process path="" id="L-3415-1482226336-846930886" hostname="" color="#FFFFFF" enableModule="true" port="54923" name="VideoMPEG">
+        <Module name="openCVmpeg">
+            <Parameter value="No selection" name="Video mode"/>
+            <Parameter value="true" name="ShowOutput"/>
+            <Parameter value="/home/atilla/Documents/Test/Neural_Network/Stimulus/stimBasilLUFAST_COL_0_Pix_77.avi" name="File Name"/>
+            <Parameter value="false" name="Monochrome"/>
+            <Parameter value="true" name="HSV"/>
+            <XRefHolder name="InputFromGroup">
+                <XRef target="L-3415-1482226364-1681692777" name="Controler"/>
+            </XRefHolder>
+            <XRefHolder name="OutputToGroup">
+                <XRef target="L-3415-1482226533-719885386" name="videoOutputRed"/>
+                <XRef target="L-3415-1482226380-1714636915" name="videoOutputGreen"/>
+                <XRef target="L-3415-1482226574-1649760492" name="videoOutputBlue"/>
+                <XRef target="L-3415-1482226490-1957747793" name="End of video"/>
+            </XRefHolder>
+        </Module>
+        <Note></Note>
+        <DiagramIcon width="50" y="152" x="142" height="50"/>
+        <Group id="CB1482242714L-10681-1482242691-412019686" color="#FFFFFF" name="down">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronIntegrateFire">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.7" name="threshold"/>
+                <Parameter value="1" name="spkAmpl"/>
+                <Parameter value="0" name="vmReset"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="342" x="773" height="50"/>
+        </Group>
+        <Group id="CB1482242730CB1482242714L-10681-1482242691-412019686" color="#FFFFFF" name="left">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronIntegrateFire">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.7" name="threshold"/>
+                <Parameter value="1" name="spkAmpl"/>
+                <Parameter value="0" name="vmReset"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="429" x="777" height="50"/>
+        </Group>
+        <Group id="CB1482242743CB1482242730CB1482242714L-10681-1482242691-412019686" color="#FFFFFF" name="right">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronIntegrateFire">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.7" name="threshold"/>
+                <Parameter value="1" name="spkAmpl"/>
+                <Parameter value="0" name="vmReset"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="518" x="777" height="50"/>
+        </Group>
+        <Group id="CB1483528021CB1482242714L-10681-1482242691-412019686" color="#FFFFFF" name="Up">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronIntegrateFire">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.7" name="threshold"/>
+                <Parameter value="1" name="spkAmpl"/>
+                <Parameter value="0" name="vmReset"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="263" x="779" height="50"/>
+        </Group>
+        <Group id="CB1483633443L-3491-1483629212-993412282" color="#FFFFFF" name="up11">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronIntegrateFire">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.9" name="threshold"/>
+                <Parameter value="1" name="spkAmpl"/>
+                <Parameter value="0" name="vmReset"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="283" x="956" height="50"/>
+        </Group>
+        <Group id="CB1483700929L-4320-1483635101-546247414" color="#FFFFFF" name="Copy of inhib">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="1" hcount="1"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.995" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="133" x="845" height="50"/>
+        </Group>
+        <Group id="L-10681-1482242139-1340260725" color="#FFFFFF" name="ON cell">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronIntegrateFire">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.02" name="threshold"/>
+                <Parameter value="1" name="spkAmpl"/>
+                <Parameter value="0" name="vmReset"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="174" x="649" height="50"/>
+        </Group>
+        <Group id="L-10681-1482242141-2064399623" color="#FFFFFF" name="OFF cell">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronIntegrateFire">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.02" name="threshold"/>
+                <Parameter value="1" name="spkAmpl"/>
+                <Parameter value="0" name="vmReset"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="252" x="644" height="50"/>
+        </Group>
+        <Group id="L-10681-1482243421-327555625" color="#FFFFFF" name="sum">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="24" x="797" height="50"/>
+        </Group>
+        <Group id="L-12235-1483698581-1137786854" color="#FFFFFF" name="Command">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="1" hcount="1"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="404" x="1440" height="50"/>
+        </Group>
+        <Group id="L-2946-1482229829-1336791198" color="#FFFFFF" name="Edge Detection Fast">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="201" x="454" height="50"/>
+        </Group>
+        <Group id="L-3415-1482226364-1681692777" color="#FFFFFF" name="Controller">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="1" hcount="2"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="101" x="132" height="50"/>
+        </Group>
+        <Group id="L-3415-1482226380-1714636915" color="#FFFFFF" name="Saturation">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="92" x="278" height="50"/>
+        </Group>
+        <Group id="L-3415-1482226490-1957747793" color="#FFFFFF" name="EndOfVideo">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="1" hcount="1"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="186" x="138" height="50"/>
+        </Group>
+        <Group id="L-3415-1482226533-719885386" color="#FFFFFF" name="Hue">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="176" x="278" height="50"/>
+        </Group>
+        <Group id="L-3415-1482226574-1649760492" color="#FFFFFF" name="Value">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="244" x="283" height="50"/>
+        </Group>
+        <Group id="L-3491-1483629189-87513069" color="#FFFFFF" name="right11">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronIntegrateFire">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.9" name="threshold"/>
+                <Parameter value="1" name="spkAmpl"/>
+                <Parameter value="0" name="vmReset"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="497" x="958" height="50"/>
+        </Group>
+        <Group id="L-3491-1483629208-1856345797" color="#FFFFFF" name="left11">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronIntegrateFire">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.9" name="threshold"/>
+                <Parameter value="1" name="spkAmpl"/>
+                <Parameter value="0" name="vmReset"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="431" x="959" height="50"/>
+        </Group>
+        <Group id="L-3491-1483629212-993412282" color="#FFFFFF" name="down11">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronIntegrateFire">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.9" name="threshold"/>
+                <Parameter value="1" name="spkAmpl"/>
+                <Parameter value="0" name="vmReset"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="363" x="957" height="50"/>
+        </Group>
+        <Group id="L-3491-1483630309-919331471" color="#FFFFFF" name="LGMD">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="20" hcount="20"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="402" x="1093" height="50"/>
+        </Group>
+        <Group id="L-4320-1483635101-546247414" color="#FFFFFF" name="inhib">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="1" hcount="1"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0.95" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="188" x="1086" height="50"/>
+        </Group>
+        <Group id="L-4320-1483635528-608832807" color="#FFFFFF" name="DMCD">
+            <Topology>
+                <TopologyRect cylinderHor="false" cylinderVert="false" vcount="1" hcount="1"/>
+            </Topology>
+            <Neuron name="neuronLinearThreshold">
+                <Parameter value="1" name="excGain"/>
+                <Parameter value="1" name="inhGain"/>
+                <Parameter value="0" name="vmPrs"/>
+                <Parameter value="false" name="clipVm"/>
+                <Parameter value="0" name="vmMin"/>
+                <Parameter value="1" name="vmMax"/>
+                <Parameter value="1" name="probability"/>
+                <Parameter value="0" name="threshold"/>
+            </Neuron>
+            <Note></Note>
+            <DiagramIcon width="50" y="404" x="1252" height="50"/>
+        </Group>
+    </Process>
+    <Connection id="CB1483633490L-3491-1483628490-1909078669" target="L-3491-1483629212-993412282" source="CB1482242714L-10681-1482242691-412019686" type="excitatory" name="Copy of Connection down->EMD New">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="20" xstart="1" ystart="6" height="15"/>
+                <Region width="20" xstart="1" ystart="1" height="15"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="11" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.0833" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="5"/>
+    </Connection>
+    <Connection id="CB1483633514L-3491-1483630337-118840998" target="L-3491-1483630309-919331471" source="L-3491-1483629212-993412282" type="excitatory" name="Copy of Connection New Group 5->New Group 6">
+        <Pattern>
+            <PatternMapped type="all">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="2" direction="RF" height="2" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.25" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="5"/>
+    </Connection>
+    <Connection id="CB1483696292L-10681-1482243641-551426215" target="L-10681-1482243421-327555625" source="L-10681-1482242141-2064399623" type="excitatory" name="Copy of Connection OFF cell->sum">
+        <Pattern>
+            <PatternMapped type="all">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="1" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="14" APSource="6"/>
+    </Connection>
+    <Connection id="L-10681-1482242203-350716915" target="L-10681-1482242139-1340260725" source="L-2946-1482229829-1336791198" type="excitatory" name="Connection New Group 1->ON cell">
+        <Pattern>
+            <PatternMapped type="all">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="1" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="12" APSource="4"/>
+    </Connection>
+    <Connection id="L-10681-1482242209-306669678" target="L-10681-1482242139-1340260725" source="L-2946-1482229829-1336791198" type="inhibitory" name="Connection New Group 1->ON cell">
+        <Pattern>
+            <PatternMapped type="all">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="1"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="1" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="14" APSource="5"/>
+    </Connection>
+    <Connection id="L-10681-1482242243-1077527698" target="L-10681-1482242141-2064399623" source="L-2946-1482229829-1336791198" type="inhibitory" name="Connection New Group 1->OFF cell">
+        <Pattern>
+            <PatternMapped type="all">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="1" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="12" APSource="7"/>
+    </Connection>
+    <Connection id="L-10681-1482242247-1271782307" target="L-10681-1482242141-2064399623" source="L-2946-1482229829-1336791198" type="excitatory" name="Connection New Group 1->OFF cell">
+        <Pattern>
+            <PatternMapped type="all">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="1"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="1" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="11"/>
+    </Connection>
+    <Connection id="L-10681-1482243637-1148473317" target="L-10681-1482243421-327555625" source="L-10681-1482242139-1340260725" type="excitatory" name="Connection ON cell->sum">
+        <Pattern>
+            <PatternMapped type="all">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="1" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="12" APSource="6"/>
+    </Connection>
+    <Connection id="L-12235-1483698586-1465084404" target="L-12235-1483698581-1137786854" source="L-4320-1483635528-608832807" type="excitatory" name="Connection DMCD->New Group 3">
+        <Pattern>
+            <PatternMapped type="center">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="1" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="5"/>
+    </Connection>
+    <Connection id="L-12235-1483699171-1685255742" target="L-4320-1483635101-546247414" source="L-10681-1482243421-327555625" type="excitatory" name="Connection sum->inhib">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="20" xstart="1" ystart="1" height="20"/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.0132" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="6"/>
+    </Connection>
+    <Connection id="L-12235-1483700964-713148769" target="CB1483700929L-4320-1483635101-546247414" source="L-10681-1482242139-1340260725" type="excitatory" name="Connection ON cell->Copy of inhib">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="20" xstart="1" ystart="1" height="20"/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.0132" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="3"/>
+    </Connection>
+    <Connection id="L-12235-1483700969-1424818406" target="CB1483700929L-4320-1483635101-546247414" source="L-10681-1482242141-2064399623" type="excitatory" name="Connection OFF cell->Copy of inhib">
+        <Pattern>
+            <PatternMapped type="all">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.0132" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="15" APSource="2"/>
+    </Connection>
+    <Connection id="L-12235-1483701123-1890617765" target="L-4320-1483635528-608832807" source="CB1483700929L-4320-1483635101-546247414" type="inhibitory" name="Connection Copy of inhib->DMCD">
+        <Pattern>
+            <PatternMapped type="center">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="4"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.9" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="0" APSource="6"/>
+    </Connection>
+    <Connection id="L-17757-1483528044-1458687350" target="CB1483528021CB1482242714L-10681-1482242691-412019686" source="L-10681-1482242139-1340260725" type="excitatory" name="Connection ON cell->Up2">
+        <Pattern>
+            <PatternMapped type="center">
+                <Region width="20" xstart="1" ystart="1" height="19"/>
+                <Region width="20" xstart="1" ystart="1" height="19"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.5" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="12" APSource="4"/>
+    </Connection>
+    <Connection id="L-17757-1483528056-1901336154" target="CB1483528021CB1482242714L-10681-1482242691-412019686" source="L-10681-1482242141-2064399623" type="excitatory" name="Connection OFF cell->Up2">
+        <Pattern>
+            <PatternMapped type="center">
+                <Region width="20" xstart="1" ystart="2" height="19"/>
+                <Region width="20" xstart="1" ystart="1" height="19"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.5" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="4"/>
+    </Connection>
+    <Connection id="L-2781-1483438042-1028929672" target="CB1482242743CB1482242730CB1482242714L-10681-1482242691-412019686" source="L-10681-1482242141-2064399623" type="excitatory" name="Connection OFF cell->right">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="19" xstart="1" ystart="1" height="20"/>
+                <Region width="19" xstart="2" ystart="1" height="20"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.5" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="12" APSource="11"/>
+    </Connection>
+    <Connection id="L-2781-1483438046-142561130" target="CB1482242743CB1482242730CB1482242714L-10681-1482242691-412019686" source="L-10681-1482242139-1340260725" type="excitatory" name="Connection ON cell->right">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="19" xstart="2" ystart="1" height="20"/>
+                <Region width="19" xstart="2" ystart="1" height="20"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.5" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="11"/>
+    </Connection>
+    <Connection id="L-2946-1482229860-686497468" target="L-2946-1482229829-1336791198" source="L-3415-1482226533-719885386" type="excitatory" name="Connection Hue->New Group 1">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="20" xstart="1" ystart="1" height="20"/>
+                <Region width="20" xstart="1" ystart="1" height="20"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRectWindow innerwidth="2" innerheight="2" outerheight="4" outerwidth="4" direction="RF" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseUniformFixedWeight">
+            <Parameter value="0.0625" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="12" APSource="4"/>
+    </Connection>
+    <Connection id="L-2946-1482229864-1995856445" target="L-2946-1482229829-1336791198" source="L-3415-1482226533-719885386" type="inhibitory" name="Connection Hue->New Group 1">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="20" xstart="1" ystart="1" height="20"/>
+                <Region width="20" xstart="1" ystart="1" height="20"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="2" direction="RF" height="2" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseUniformFixedWeight">
+            <Parameter value="0.25" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="15" APSource="6"/>
+    </Connection>
+    <Connection id="L-3491-1483628490-1909078669" target="CB1483633443L-3491-1483629212-993412282" source="CB1483528021CB1482242714L-10681-1482242691-412019686" type="excitatory" name="Connection down->EMD New">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="20" xstart="1" ystart="1" height="15"/>
+                <Region width="20" xstart="1" ystart="6" height="15"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="11" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.0833" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="14" APSource="5"/>
+    </Connection>
+    <Connection id="L-3491-1483628495-607205291" target="L-3491-1483629208-1856345797" source="CB1482242730CB1482242714L-10681-1482242691-412019686" type="excitatory" name="Connection left->EMD New">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="15" xstart="1" ystart="1" height="20"/>
+                <Region width="15" xstart="6" ystart="1" height="20"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="11" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.0833" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="6"/>
+    </Connection>
+    <Connection id="L-3491-1483628500-2033095725" target="L-3491-1483629189-87513069" source="CB1482242743CB1482242730CB1482242714L-10681-1482242691-412019686" type="excitatory" name="Connection right->EMD New">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="15" xstart="6" ystart="1" height="20"/>
+                <Region width="15" xstart="1" ystart="1" height="20"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="11" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.0833" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="12" APSource="7"/>
+    </Connection>
+    <Connection id="L-3491-1483630337-118840998" target="L-3491-1483630309-919331471" source="CB1483633443L-3491-1483629212-993412282" type="excitatory" name="Connection New Group 5->New Group 6">
+        <Pattern>
+            <PatternMapped type="center">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="2" direction="RF" height="2" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.25" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="5"/>
+    </Connection>
+    <Connection id="L-3491-1483630341-251465795" target="L-3491-1483630309-919331471" source="L-3491-1483629208-1856345797" type="excitatory" name="Connection New Group 3->New Group 6">
+        <Pattern>
+            <PatternMapped type="all">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="2" direction="RF" height="2" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.25" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="14" APSource="5"/>
+    </Connection>
+    <Connection id="L-3491-1483630345-1806543891" target="L-3491-1483630309-919331471" source="L-3491-1483629189-87513069" type="excitatory" name="Connection New Group 2->New Group 6">
+        <Pattern>
+            <PatternMapped type="all">
+                <All/>
+                <All/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="2" direction="RF" height="2" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.25" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="15" APSource="5"/>
+    </Connection>
+    <Connection id="L-4320-1483635556-1394325596" target="L-4320-1483635528-608832807" source="L-3491-1483630309-919331471" type="excitatory" name="Connection New Group 6->New Group 8">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="20" xstart="1" ystart="1" height="20"/>
+                <Region width="1" xstart="1" ystart="1" height="1"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.25" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="7"/>
+    </Connection>
+    <Connection id="L-9105-1482328666-182636674" target="CB1482242730CB1482242714L-10681-1482242691-412019686" source="L-10681-1482242141-2064399623" type="excitatory" name="Connection OFF cell->left">
+        <Pattern>
+            <PatternMapped type="center">
+                <Region width="19" xstart="2" ystart="1" height="20"/>
+                <Region width="19" xstart="1" ystart="1" height="20"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.5" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="13" APSource="7"/>
+    </Connection>
+    <Connection id="L-9105-1482328671-488793941" target="CB1482242730CB1482242714L-10681-1482242691-412019686" source="L-10681-1482242139-1340260725" type="excitatory" name="Connection ON cell->left">
+        <Pattern>
+            <PatternMapped type="center">
+                <Region width="19" xstart="1" ystart="1" height="20"/>
+                <Region width="19" xstart="1" ystart="1" height="20"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.5" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="12" APSource="7"/>
+    </Connection>
+    <Connection id="L-9105-1482329488-1270037437" target="CB1482242714L-10681-1482242691-412019686" source="L-10681-1482242139-1340260725" type="excitatory" name="Connection ON cell->down">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="20" xstart="1" ystart="2" height="19"/>
+                <Region width="20" xstart="1" ystart="2" height="19"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.5" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="14" APSource="5"/>
+    </Connection>
+    <Connection id="L-9105-1482329503-1520105261" target="CB1482242714L-10681-1482242691-412019686" source="L-10681-1482242141-2064399623" type="excitatory" name="Connection OFF cell->down">
+        <Pattern>
+            <PatternMapped type="all">
+                <Region width="20" xstart="1" ystart="1" height="19"/>
+                <Region width="20" xstart="1" ystart="2" height="19"/>
+            </PatternMapped>
+        </Pattern>
+        <Arborization>
+            <ArbRect width="1" direction="RF" height="1" initialization_probability="1"/>
+        </Arborization>
+        <AttenuationFunction>
+            <FunUniform value="0"/>
+        </AttenuationFunction>
+        <DelayFunction>
+            <FunUniform value="0"/>
+        </DelayFunction>
+        <Synapse name="synapseFixedWeight">
+            <Parameter value="0.5" name="weight"/>
+        </Synapse>
+        <Note></Note>
+        <DiagramLine APTarget="15" APSource="5"/>
+    </Connection>
+</System>
+
