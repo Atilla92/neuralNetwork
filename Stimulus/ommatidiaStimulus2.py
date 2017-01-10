@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # Set stimulus parameters
 velStim = -0.5  #m/s velocity of stimulus
 lStim = 0.01 #m  half length of stimulus
-xStart = 0.50 #m start approach distance away from specimen 
+xStart = 0.05 #m start approach distance away from specimen 
 
 # Set locust parameters
 xFov = 180 # degrees, fov locust azimuth
@@ -15,6 +15,8 @@ yFov = 180 # degrees, fov locust elevation
 angPix = 4.5 # deg/pixel interommatidial angle specimen
 
 #Set parameters image
+#scaleCon = (100,100,100)
+#scaleCon = (100,100,100)
 scaleCon = (0,0,0)
 backgroundColor = 255  # 0 black, 255 white 
 scaleRes = 10  # resolution scale, to downsample later
@@ -60,14 +62,15 @@ tStimulus, lStimulus, theta, xRun  = getParamters(velStim, tStart, tEnd, dt, lSt
 # print tStimulus
 
 # def writerImage(fps, outWidth. outHeight, wImage, hImage, dt, lStimulus, img)
+
 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-writerOut = cv2.VideoWriter('stimCircle_fps_'+str(fps) +'_v_' +str(velStim)+'_l_'+str(lStim)+ '_x_'+ str(xStart)+ '_Sc_'+str(scaleCon)+'.avi', fourcc, fps , (outWidth, outHeight))
+writerOut = cv2.VideoWriter('SquarePos_fps_'+str(fps) +'_v_' +str(velStim)+'_l_'+str(lStim)+ '_x_'+ str(xStart)+ '_Sc_'+str(scaleCon)+'.avi', fourcc, fps , (outWidth, outHeight))
 
 # Put in some frames at the beginning:
 
 
-# # Repetition first frame
-# firstFrame = 0
+# Repetition first frame
+firstFrame = 0
 # for i in range(1,numFrames):
 # 	length = lStimulus[firstFrame] 
 # 	xTopLeft1 = int(round(wImage/2 - (length/2)))
@@ -80,19 +83,23 @@ writerOut = cv2.VideoWriter('stimCircle_fps_'+str(fps) +'_v_' +str(velStim)+'_l_
 # 	cv2.waitKey(int(math.ceil(dt)))
 # 	writerOut.write(imgResize)
 
-# # Looming stimulus
-# for i in np.nditer(lStimulus) :
-# 	xTopLeft1 = int(round(wImage/2 - (i/2)))
-# 	yTopLeft1 = int(round(hImage/2 - (i /2)))
-# 	xBottomRight1 = int(round(wImage/2 + (i/2)))
-# 	yBottomRight1 = int(round(hImage/2 + i/ 2))
-# 	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),scaleCon, thickness = cv2.FILLED )
-# 	#cv2.imshow('figureSquare1', img)
-# 	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
-# 	cv2.waitKey(int(math.ceil(dt)))
-# 	writerOut.write(imgResize)
 
-# # Repetition last frame
+
+# Looming stimulus
+for i in np.nditer(lStimulus) :
+	xTopLeft1 = int(round(wImage/3 - (i/2)))
+	yTopLeft1 = int(round(hImage/3 - (i /2)))
+	xBottomRight1 = int(round(wImage/3 + (i/2)))
+	yBottomRight1 = int(round(hImage/3 + i/ 2))
+	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),scaleCon, thickness = cv2.FILLED )
+	#cv2.imshow('figureSquare1', img)
+	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
+	#imgResize = cv2.resize(img, (20, 20) , interpolation = cv2.INTER_AREA )
+	
+	cv2.waitKey(int(math.ceil(dt)))
+	writerOut.write(imgResize)
+
+# Repetition last frame
 # lastFrame = len(lStimulus)-1
 
 # for i in range(1,numFrames):
@@ -103,28 +110,11 @@ writerOut = cv2.VideoWriter('stimCircle_fps_'+str(fps) +'_v_' +str(velStim)+'_l_
 # 	yBottomRight1 = int(round(hImage/2 + length/ 2))
 # 	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),scaleCon, thickness = cv2.FILLED )
 # 	#cv2.imshow('figureSquare1', img)
-# 	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
+# 	imgResize = cv2.resize(img, (20, 20) , interpolation = cv2.INTER_AREA )
+	
+# 	#imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
 # 	cv2.waitKey(int(math.ceil(dt)))
 # 	writerOut.write(imgResize)
-
-#Position start circle
-yCenter = int(round(hImage/2))
-xCenter = int(round(wImage/2))
-
-plt.plot(tStimulus,lStimulus)
-plt.show()
-# Looming stimulus Circle
-for i in np.nditer(lStimulus) :
-	# xTopLeft1 = int(round(wImage/2 - (i/2)))
-	# yTopLeft1 = int(round(hImage/2 - (i /2)))
-	# xBottomRight1 = int(round(wImage/2 + (i/2)))
-	# yBottomRight1 = int(round(hImage/2 + i/ 2))
-	figureSquare1 = cv2.circle(img,(xCenter,yCenter),i,scaleCon, thickness = cv2.FILLED )
-	#cv2.imshow('figureSquare1', img)
-	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
-	cv2.waitKey(int(math.ceil(dt)))
-	writerOut.write(imgResize)
-
 
 
 writerOut.release()
