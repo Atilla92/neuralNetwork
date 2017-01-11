@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 # Set stimulus parameters
-velStim = -0.5  #m/s velocity of stimulus
+velStim = -0.05  #m/s velocity of stimulus
 lStim = 0.01 #m  half length of stimulus
 xStart = 0.05 #m start approach distance away from specimen 
 
@@ -22,7 +22,9 @@ backgroundColor = 255  # 0 black, 255 white
 scaleRes = 10  # resolution scale, to downsample later
 fps = 200 # Frame Resolution
 numFrames = 10 # Number of repetition frames at end and beginning 
-
+#Starting position, 2 is center, 3 left up,, 4 right, down
+xposFrac = 2
+yposFrac = 2 
 #Configure Image 
 
 def createImage(xFov, yFov , angPix, scaleRes):
@@ -37,13 +39,15 @@ def createImage(xFov, yFov , angPix, scaleRes):
 
 #Initiate Parameters
 
-dt = 1./fps 
-tStart= xStart/velStim
-tEnd = 0
 
 
-def getParamters(velStim, tStart , tEnd, dt, lStim, angPix ):
 
+
+
+def getParamters(velStim, xStart, fps, lStim, angPix ):
+	dt = 1./fps 
+	tEnd = 0
+	tStart= xStart/velStim
 	t = np.arange(tStart, tEnd, dt)
 	xRun = np.multiply(velStim,t)
 	thetaArray= np.divide(lStim , xRun)
@@ -52,10 +56,10 @@ def getParamters(velStim, tStart , tEnd, dt, lStim, angPix ):
 	lPix1 = np.divide(thetaRun, angPix) # this is the whole length
 	lPix = np.multiply(lPix1, scaleRes* 180/math.pi)
 
-	return t, lPix , thetaRun, xRun
+	return t, lPix , thetaRun, xRun, dt
 
 img, outHeight, outWidth, hImage, wImage = createImage(xFov, yFov, angPix, scaleRes)
-tStimulus, lStimulus, theta, xRun  = getParamters(velStim, tStart, tEnd, dt, lStim, angPix)
+tStimulus, lStimulus, theta, xRun, dt  = getParamters(velStim, xStart, fps, lStim, angPix )
 
 # plt.plot(tStimulus, lStimulus)
 # plt.show()
@@ -87,10 +91,10 @@ firstFrame = 0
 
 # Looming stimulus
 for i in np.nditer(lStimulus) :
-	xTopLeft1 = int(round(wImage/3 - (i/2)))
-	yTopLeft1 = int(round(hImage/3 - (i /2)))
-	xBottomRight1 = int(round(wImage/3 + (i/2)))
-	yBottomRight1 = int(round(hImage/3 + i/ 2))
+	xTopLeft1 = int(round(wImage/xposFrac - (i/2)))
+	yTopLeft1 = int(round(hImage/yposFrac - (i /2)))
+	xBottomRight1 = int(round(wImage/xposFrac + (i/2)))
+	yBottomRight1 = int(round(hImage/yposFrac + i/ 2))
 	figureSquare1 = cv2.rectangle(img,(xTopLeft1,yTopLeft1),(xBottomRight1,yBottomRight1),scaleCon, thickness = cv2.FILLED )
 	#cv2.imshow('figureSquare1', img)
 	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
@@ -121,5 +125,11 @@ writerOut.release()
 
 cv2.destroyAllWindows()
 
+
+from tempfile import TemporaryFile
+outfile = TemporaryFile()
+data = []
+data = np.column_stack((tStimulus, theta))
+np.save(outfile,data)
 
 

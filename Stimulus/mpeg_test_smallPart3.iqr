@@ -6,7 +6,7 @@
         <Module name="openCVmpeg">
             <Parameter value="No selection" name="Video mode"/>
             <Parameter value="true" name="ShowOutput"/>
-            <Parameter value="/home/atilla/Documents/Test/Neural_Network/Stimulus/stimCircle_fps_200_v_-0.5_l_0.01_x_0.5_Sc_(0, 0, 0).avi" name="File Name"/>
+            <Parameter value="/home/atilla/Documents/Test/Neural_Network/Stimulus/SquarePos_fps_200_v_-0.5_l_0.01_x_0.05_Sc_(0, 0, 0).avi" name="File Name"/>
             <Parameter value="false" name="Monochrome"/>
             <Parameter value="true" name="HSV"/>
             <XRefHolder name="InputFromGroup">
@@ -344,7 +344,7 @@
                 <Parameter value="0" name="threshold"/>
             </Neuron>
             <Note></Note>
-            <DiagramIcon width="50" height="50" x="177" y="342"/>
+            <DiagramIcon width="50" height="50" x="96" y="387"/>
         </Group>
         <Group color="#FFFFFF" id="CB1484054657CB1483972215CB1483972179CB1483633443L-3491-1483629212-993412282" name="inhib">
             <Topology>
@@ -363,7 +363,7 @@
                 <Parameter value="0" name="vmReset"/>
             </Neuron>
             <Note></Note>
-            <DiagramIcon width="50" height="50" x="331" y="343"/>
+            <DiagramIcon width="50" height="50" x="229" y="413"/>
         </Group>
     </Process>
     <Process hostname="" color="#FFFFFF" port="54923" enableModule="true" id="L-9945-1483967805-1604430126" name="LGMD" path="">
