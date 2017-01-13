@@ -50,8 +50,11 @@ def findID(nameFile):
 					IDName2 = IDName
 		IDMat= np.asarray(IDMat)			
 		IDMat =IDMat[IDMat[:,2].argsort()[::-1]]
+		IDNames = IDMat[:,1]
+		IDNums = IDMat[:,0]
 
-	return IDNums, IDNames, IDMat
+
+	return IDNums, IDNames
 
 
 #reorder 
@@ -113,11 +116,16 @@ def plotAllData(IDLine, data) :
 #create plots to compare
 #name. inhibitory, excitatory, vm, act, average, neuron
 
-IDNums, IDNames, IDMat = findID(nameFile)
+IDNums, IDNames = findID(nameFile)
 IDLine = rewriteCycleLine(nameFile,IDNames,IDNums)
 
+IDNames = IDMat[:,1]
+IDNums = IDMat[:,0]
 
+print IDNums
 print IDMat
+
+
 # IDMat= np.asarray(IDMat)
 
 
