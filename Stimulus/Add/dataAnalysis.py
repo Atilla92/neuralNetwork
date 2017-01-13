@@ -16,19 +16,20 @@ groupA1 = 'Hue'
 groupB1 = 'Edge Detection'
 
 #Imprt data from iqr neural network
-data= np.genfromtxt(nameFile, delimiter = ';')
-data= data[1:,:] #exclude first row nomenclature
 
+def importData(nameFile):
+	data= np.genfromtxt(nameFile, delimiter = ';')
+	data= data[1:,:] #exclude first row nomenclature
+	return data
 
+data = importData(nameFile)
 
-
-# if 'Hue' in data1.read():
-# 	print True
-
-
+# Read text file sampling data, extract ID
 def findID(nameFile):
 	IDNums=[]
 	IDNames=[]
+	IDMat = []
+
 	with open(nameFile) as f:
 		for line in f:
 			line = line.strip()
@@ -44,9 +45,19 @@ def findID(nameFile):
 				if printName == True: 
 					IDNums.append(IDNumber)
 					IDNames.append(IDName)
+					lengthNum=len(IDNumber)
+					IDMat.append ([IDNumber, IDName,lengthNum])
 					IDName2 = IDName
-	return IDNums, IDNames
+		IDMat= np.asarray(IDMat)			
+		IDMat =IDMat[IDMat[:,2].argsort()[::-1]]
 
+	return IDNums, IDNames, IDMat
+
+
+#reorder 
+
+
+# Rewrite IDNumber with IDName
 def rewriteCycleLine(nameFile,IDNames,IDNums):	
 	with open(nameFile) as f:
 		for line in f:
@@ -58,89 +69,11 @@ def rewriteCycleLine(nameFile,IDNames,IDNums):
 					IDLine= [w.replace('RangeAverage', 'RaAv') for w in IDLine]
 	return IDLine
 			
-
-
-			# print groupA1Exc_avg
-
-
-
-# print IDFind
-# print IDNums, IDNames
-
-
-
-# foundA1 = False 
-# foundB1 = False 
-
-
-# with open(nameFile) as f:
-# 	for line in f:
-# 		line = line.strip()
-# 		if groupA1 in line and foundA1 == False:
-# 			IDlineA1 = line.split('=')
-# 			IDGroupA1 = IDlineA1[1]
-# 			#print IDGroupA1
-# 			foundA1 = True
-# 		if groupB1 in line and foundB1 == False:
-# 			IDlineB1 = line.split('=')
-# 			IDGroupB1 = IDlineB1[1]
-# 			print IDGroupB1
-# 			foundB1 = True
-# g =open(nameFile, 'r')
-# filedata = g.read()
-# g.close()
-
-# #for i in len(IDNums):
-# newdata = filedata.replace(IDNums[1], IDNames[1])
-# g=open('TextOut', 'w')
-# g.write(newdata)
-# g.close()
-
-# if foundA1 == True:
-# 	newdata = filedata.replace(IDGroupA1, groupA1)
-# if foundB1 == True:
-# 	g = open(nameFile, 'w')
-# 	g.write(newdata)
-# 	g.close()
-#will probably produce an error if not there, 			
-
-
-
-
-
-IDNums, IDNames = findID(nameFile)
-IDLine = rewriteCycleLine(nameFile,IDNames,IDNums)
-print IDLine
-
-number = len(IDLine)
-
-#Make Plots, all data  
-time= data[:,0]
-for i in range(1, len(IDLine),1):
-	# ID = IDLine[i]
-	# print ID
-	plt.plot(time, data[:,i], label =(str(IDLine[i])))
-	plt.legend()
-	
-plt.show()
-
-print 
-
-
-groupNameA= [ ' Edge Detection '] #Input group you want to plot
-
-# allLinesA= False
-inhibitoryA= 1
-excitatoryA= 1
-cellPotentialA= 0
-activityA = 0
-averageA = 1
-neuronsA = 0
-
-
-def createPlot(groupNameA, inhibitoryA, excitatoryA, cellPotentialA, activityA, averageA, neuronsA):
+# Create custom defined plots
+def createPlot(groupNameA, inhibitoryA, excitatoryA, cellPotentialA, activityA, averageA, neuronsA, data, IDLine):
 	partA = []
 	partA2 = []
+	time= data[:,0]
 	if inhibitoryA == 1:
 		partA.append('_inhIn_')
 	if excitatoryA == 1 :
@@ -152,25 +85,62 @@ def createPlot(groupNameA, inhibitoryA, excitatoryA, cellPotentialA, activityA, 
 	if averageA == 1:
 		partA2 = 'RaAv'
 
-
 	for i in range(len(partA)):
 		columnGroup = data[:, IDLine.index(groupNameA + partA[i] + partA2)]
-		groupPlot = plt.plot(time,columnGroup, label=groupNameA + partA[i])
+		groupPlot = plt.plot(time,columnGroup, label=groupNameA + partA[i] + partA2)
 		plt.legend()
 
 	return groupPlot
 
 
-groupPlotA= createPlot(' Edge Detection ' , 0, 1,0, 0 ,1 ,0)
-groupPlotB= createPlot('Hue' , 0, 0,1, 0 ,1 ,0)
-plt.show()
+
+#Initiate creating plots
+
+
+#Make Plots, all data
+def plotAllData(IDLine, data) :
+	time= data[:,0] 
+	for i in range(1, len(IDLine),1):
+		allPlots= plt.plot(time, data[:,i], label =(str(IDLine[i])))
+		plt.legend()
+	return allPlots
+
+
+
+ 
+
+
+#create plots to compare
+#name. inhibitory, excitatory, vm, act, average, neuron
+
+IDNums, IDNames, IDMat = findID(nameFile)
+IDLine = rewriteCycleLine(nameFile,IDNames,IDNums)
+
+
+print IDMat
+# IDMat= np.asarray(IDMat)
+
+
+#Mat3 =IDMat2[np.argsort((IDMat2[:,2]))]
+# IDMat =IDMat[IDMat[:,2].argsort()[::-1]]
+# print IDMat
+# # IDMat = []
+# IDMat.append([])
+# IDMa
+# IDMat[0].append(IDNums)
+# IDMat[1].append(IDNames)
+# print IDMat 
+# allPlots = plotAllData(IDLine, data)
+# plt.show()
+# groupPlotA= createPlot(' Edge Detection ', 1, 0,0, 0 ,1 ,0, data)
+# groupPlotB= createPlot('Hue' , 0, 0,1, 0 ,1 ,0, data)
+# plt.show()
 
 
 
 # if foundA1 == True :
 			# groupA1Exc_avg=data[1:-1, IDLine.index(groupA1 + '_excIn_RangeAverage')]
 			# groupA1Vm_avg= data[1:-1, IDLine.index(groupA1 + '_vm_RangeAverage')]
-
 
 
 
@@ -191,3 +161,20 @@ tStimScale = (tStim*len(data))+len(data)
 
 
 
+# g =open(nameFile, 'r')
+# filedata = g.read()
+# g.close()
+
+# #for i in len(IDNums):
+# newdata = filedata.replace(IDNums[1], IDNames[1])
+# g=open('TextOut', 'w')
+# g.write(newdata)
+# g.close()
+
+# if foundA1 == True:
+# 	newdata = filedata.replace(IDGroupA1, groupA1)
+# if foundB1 == True:
+# 	g = open(nameFile, 'w')
+# 	g.write(newdata)
+# 	g.close()
+#will probably produce an error if not there, 			
