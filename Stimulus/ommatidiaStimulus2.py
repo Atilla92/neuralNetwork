@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 # Set stimulus parameters
-velStim = -0.05  #m/s velocity of stimulus
+velStim = -0.18  #m/s velocity of stimulus
 lStim = 0.01 #m  half length of stimulus
 xStart = 0.05 #m start approach distance away from specimen 
 
