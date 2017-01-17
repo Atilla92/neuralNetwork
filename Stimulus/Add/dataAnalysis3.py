@@ -133,19 +133,23 @@ def definePlots(nameFile, partA, partA2, allGroups, groupNames, scale):
 	if allGroups == True:
 		groupNames= ['']
 
+	print groupNames
+
 	for j in range(len(groupNames)):
 		groupName = groupNames[j]
 		for i in range(1, len(IDLine),1):
 			
 			for k in range(len(partA)):
 				nameTrue=groupName + partA[k] + partA2
-				
 				if nameTrue in IDLine[i]:
+					print nameTrue
+					print True
 					ID = IDLine[i]
 					IDLine2.append(ID)
 					columnGroup = data[:, i]
 					groupPlot = plt.plot(time,columnGroup, label=(str(IDLine[i])+'_v_'+str(v)+'_l_'+str(l)+'_l/v_'+str(lOverV)))
 					plt.legend()
+
 	return groupPlot
 
 def extractValuesFileName(nameFile):
@@ -190,25 +194,30 @@ def extractFiles(filePath):
 	
 def createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale):
 	nameFiles = extractFiles(filePath)
-	thresholds = setThresholds(nameFiles, 'Hue', '_act_','RaAv')
 	for i in range(len(nameFiles)):
 		nameFile=nameFiles[i]
-		#thresholds= [0.1, 0.1, 0.1, 0.1 , 0.2]
-		plotTimeCol = plotTimeCollision(nameFile, 'Hue', '_act_','RaAv', thresholds)
 		plotFile = definePlots(nameFile, partA, partA2, allGroups, groupNames, scale)
+		plotTimeCol = plotTimeCollision(nameFile, 'Hue', '_act_','RaAv')
 	return plotFile, plotTimeCol
 
 
-def plotTimeCollision(nameFile, groupA1, partA, partA2, thresholds):
+def plotTimeCollision(nameFile, groupA1, partA, partA2):
 
-	#lOverV, v, l, typeStim = extractValuesFileName(nameFile)
-	#print v
+	lOverV, v, l, typeStim = extractValuesFileName(nameFile)
+	print v
 	data = importData(nameFile)
 	IDLine = rewriteCycleLine(nameFile)
+
 	time = data[:,0]
-	data2 = data[:, IDLine.index(groupA1 + partA+ partA2)]
+	data2 = data[:, IDLine.index(groupA1 + partA + partA2)]
+	#plt.plot(time,data2)
+	#plt.show()
+	#threshold =float(raw_input('threshold'))
+	#threshold = int(threshold)
 	threshold = 0.2
 	xPos = (np.r_[True, data2[1:] < data2[:-1]] & np.r_[data2[:-1] < data2[1:], True])* (data2<threshold) * time 
+	printDat = (data2<threshold)
+	print printDat
 	xTimeCol= []
 	for i in np.nditer(xPos):
 		if i> 0 :
@@ -217,25 +226,8 @@ def plotTimeCollision(nameFile, groupA1, partA, partA2, thresholds):
 
 
 	#plt.plot(time,data2)
-	return timeCol, data2
+	return timeCol
 
-def setThresholds(nameFiles, groupA1, partA, partA2):
-	thresholds = []
-	#print nameFiles
-	#nameFiles = extractFiles(filePath)
-	for i in range(len(nameFiles)):
-		nameFile=nameFiles[i]
-		data = importData(nameFile)
-		IDLine = rewriteCycleLine(nameFile)
-		time = data[:,0]
-		data2 = data[:, IDLine.index(groupA1 + partA + partA2)]
-		plt.plot(time, data2)
-		plt.show()
-		threshold = float(raw_input('threshold: '))
-		thresholds.append(threshold)
-		plotThres= True
-	print thresholds
-	return thresholds
 
 
 

@@ -4,8 +4,9 @@ import sys
 from sys import path
 
 path.append('/home/atilla/Documents/Test/Neural_Network/Stimulus/Add/')
-import dataAnalysis3 as datAn
-from dataAnalysis3 import findID, definePlots, extractValuesFileName, extractFiles, createPlotFiles, plotTimeCollision
+import dataAnalysis as datAn
+
+from dataAnalysis import findID, definePlots, extractValuesFileName, extractFiles, createPlotFiles, plotTimeCollision
 
 
 # path.append('/home/atilla/Documents/Test/Neural_Network/Stimulus/Add/Data')
@@ -39,26 +40,33 @@ groupE2 = 'WTA Inhib'
 groupF1 = 'LGMD WTA'
 
 groupNames= [groupA1, groupF1]#, groupE1]# groupC1, groupC2]
-partA = '_act_'#'_inhIn_']
+partA =['_act_']# ['_inhIn_']
 partA2 = 'RaAv'
 typeTrue = ''
 allGroups = False 
 scale = 1
 
-#thresholds = datAn.setThresholds(filePath, groupA1, partA, partA2)
-plots = datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale)
 
+
+#plotDefine = datAn.definePlots(nameFile, partA, partA2, allGroups, groupNames, scale )
+#plt.show()
+
+
+plotDefineAgain = datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale)
 plt.show()
+#datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale)
+
+#plt.show()
 #plt.show()
 # Congfigure own plots
 groupNames= [groupA1, groupF1]#, groupE1]# groupC1, groupC2]
-partA = '_act_'#'_inhIn_']
+partA = ['_act_']#, '_inhIn_']
 partA2 = 'RaAv'
 typeTrue = ''
 allGroups = False 
 scale = 1
 
-
+import dataAnalysis3 as datAn
 #definePlots()
 plotDefine = datAn.definePlots(nameFile, partA, partA2, allGroups, groupNames, scale )
 #plt.show(block = False)
@@ -77,9 +85,9 @@ plotDefine2 = datAn.definePlots(nameFile4, partA, partA2, allGroups, groupNames,
 scale =1
 plotDefine2 = datAn.definePlots(nameFile5, partA, partA2, allGroups, groupNames, scale)
 
-#plt.show()#block = False)
+plt.show()#block = False)
 
-plt.show()
+
 
 #Analyse time of collision
 
