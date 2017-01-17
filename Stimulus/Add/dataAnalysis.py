@@ -153,10 +153,6 @@ def extractValuesFileName(nameFile):
 	nameFiles = np.array(nameFile)
 	if np.size(nameFile)== 1:
 		nameFiles = [nameFile]
-	#print type(nameFiles)
-	#print np.size(nameFiles)
-
-	#print nameFiles
 	for i in range(np.size(nameFiles)):
 		#print i
 		nameFileMat = nameFiles[i].split('_')
@@ -175,7 +171,7 @@ def extractValuesFileName(nameFile):
 		 	lOverV	="{0:.2f}".format(lOverV)
 		nameFileSplit.append(nameFileMat)
 
-	#print v, l 
+
 
 	return  lOverV, v, l, typeStim
 
@@ -190,16 +186,23 @@ def extractFiles(filePath):
 	
 def createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale):
 	nameFiles = extractFiles(filePath)
+
 	thresholds = setThresholds(nameFiles, 'Hue', '_act_','RaAv')
+	xTime2 = []
+	print np.size(nameFiles)
+	#thresholds= [0.1, 0.1, 0.25, 0.1 , 0.2]
 	for i in range(len(nameFiles)):
 		nameFile=nameFiles[i]
-		#thresholds= [0.1, 0.1, 0.1, 0.1 , 0.2]
-		plotTimeCol = plotTimeCollision(nameFile, 'Hue', '_act_','RaAv', thresholds)
+		
+		threshold = thresholds[i]
+		#threshold = 0.2
+		plotTimeCol, xTimeCol = plotTimeCollision(nameFile, 'Hue', '_act_','RaAv', threshold)
+		xTime2.append(xTimeCol)
 		plotFile = definePlots(nameFile, partA, partA2, allGroups, groupNames, scale)
 	return plotFile, plotTimeCol
 
 
-def plotTimeCollision(nameFile, groupA1, partA, partA2, thresholds):
+def plotTimeCollision(nameFile, groupA1, partA, partA2, threshold):
 
 	#lOverV, v, l, typeStim = extractValuesFileName(nameFile)
 	#print v
@@ -207,7 +210,8 @@ def plotTimeCollision(nameFile, groupA1, partA, partA2, thresholds):
 	IDLine = rewriteCycleLine(nameFile)
 	time = data[:,0]
 	data2 = data[:, IDLine.index(groupA1 + partA+ partA2)]
-	threshold = 0.2
+	#threshold = 0.2
+	#print type(threshold)
 	xPos = (np.r_[True, data2[1:] < data2[:-1]] & np.r_[data2[:-1] < data2[1:], True])* (data2<threshold) * time 
 	xTimeCol= []
 	for i in np.nditer(xPos):
@@ -215,9 +219,10 @@ def plotTimeCollision(nameFile, groupA1, partA, partA2, thresholds):
 			timeCol = plt.axvline(i, color ='r', linewidth=2.5, linestyle = '--')
 			xTimeCol.append(i)
 
+	return timeCol, xTimeCol
 
-	#plt.plot(time,data2)
-	return timeCol, data2
+
+
 
 def setThresholds(nameFiles, groupA1, partA, partA2):
 	thresholds = []
@@ -234,7 +239,6 @@ def setThresholds(nameFiles, groupA1, partA, partA2):
 		threshold = float(raw_input('threshold: '))
 		thresholds.append(threshold)
 		plotThres= True
-	print thresholds
 	return thresholds
 
 
