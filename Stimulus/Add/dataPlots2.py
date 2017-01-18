@@ -42,7 +42,6 @@ groupF1 = 'LGMD WTA'
 groupNames= [groupA1, groupF1]#, groupE1]# groupC1, groupC2]
 partA =['_act_']# ['_inhIn_']
 partA2 = 'RaAv'
-typeTrue = ''
 allGroups = False 
 scale = 1
 
@@ -50,16 +49,36 @@ scale = 1
 
 #plotDefine = datAn.definePlots(nameFile, partA, partA2, allGroups, groupNames, scale )
 #plt.show()
-plotTimeCol = False
-plotFile = False
+plotTimeCol = True
+plotFile = True
 plotLGMDspike = False
-plotScatter = True 
-plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter)
+plotScatter = False
+setThresholdsMan = False
+#plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter, setThresholdsMan)
 
 plt.show()
+plotLGMDspike = False
+plotTimeCol = False
+plotFile = False
+plotScatter = True
+setThresholdsMan = False
+typeTrue= 'circle'
+thresholdSpike = True
+plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter, setThresholdsMan, typeTrue, thresholdSpike)
+
+
+# plotLGMDspike = False
+# plotTimeCol = False
+# plotFile = False
+# plotScatter = True
+# setThresholdsMan = False
+# typeTrue= 'square'
+# thresholdSpike = True
+# plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter, setThresholdsMan, typeTrue, thresholdSpike)
 
 
 
+plt.show()
 #datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale)
 
 #plt.show()

@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 
 
 # Set stimulus parameters
-velStim = -0.5  #m/s velocity of stimulus
+velStim = -0.08  #m/s velocity of stimulus
 lStim = 0.01 #m  half length of stimulus
-xStart = 0.50 #m start approach distance away from specimen 
+xStart = 0.05 #m start approach distance away from specimen 
 
 # Set locust parameters
 xFov = 180 # degrees, fov locust azimuth
@@ -111,8 +111,8 @@ writerOut = cv2.VideoWriter('stimCircle_fps_'+str(fps) +'_v_' +str(velStim)+'_l_
 yCenter = int(round(hImage/2))
 xCenter = int(round(wImage/2))
 
-plt.plot(tStimulus,lStimulus)
-plt.show()
+# plt.plot(tStimulus,lStimulus)
+# plt.show()
 # Looming stimulus Circle
 for i in np.nditer(lStimulus) :
 	# xTopLeft1 = int(round(wImage/2 - (i/2)))
