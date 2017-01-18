@@ -133,14 +133,13 @@ def definePlots(nameFile, partA, partA2, allGroups, groupNames, scale):
 	if allGroups == True:
 		groupNames= ['']
 
-	print groupNames
-
 	for j in range(len(groupNames)):
 		groupName = groupNames[j]
 		for i in range(1, len(IDLine),1):
 			
 			for k in range(len(partA)):
 				nameTrue=groupName + partA[k] + partA2
+
 				if nameTrue in IDLine[i]:
 					print nameTrue
 					print True

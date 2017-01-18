@@ -50,10 +50,16 @@ scale = 1
 
 #plotDefine = datAn.definePlots(nameFile, partA, partA2, allGroups, groupNames, scale )
 #plt.show()
+plotTimeCol = False
+plotFile = False
+plotLGMDspike = False
+plotScatter = True 
+plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter)
 
-
-plotDefineAgain = datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale)
 plt.show()
+
+
+
 #datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale)
 
 #plt.show()
@@ -66,53 +72,37 @@ typeTrue = ''
 allGroups = False 
 scale = 1
 
-import dataAnalysis3 as datAn
-#definePlots()
-plotDefine = datAn.definePlots(nameFile, partA, partA2, allGroups, groupNames, scale )
-#plt.show(block = False)
-scale =1
-plotDefine2 = datAn.definePlots(nameFile2, partA, partA2, allGroups, groupNames, scale )
-
-
-scale =1
-plotDefine2 = datAn.definePlots(nameFile3, partA, partA2, allGroups, groupNames,scale )
-
-
-scale =1
-plotDefine2 = datAn.definePlots(nameFile4, partA, partA2, allGroups, groupNames, scale )
-
-
-scale =1
-plotDefine2 = datAn.definePlots(nameFile5, partA, partA2, allGroups, groupNames, scale)
-
-plt.show()#block = False)
 
 
 
-#Analyse time of collision
 
 
-nameFile = nameFile3
-# nameFile = 'data_v_0.05_l_0.01_type_square_pixDet_11_.dat'
-#timeCol = datAn.plotTimeCollision(nameFile, 'Hue', '_act_','RaAv' )
-#plt.show()
-# for i in arange(xPos):
-# 	if xPos[i]	xPos > 0 
-# print xPos
-
-#print multI
-#print critMin
+# import dataAnalysis3 as datAn
+# #definePlots()
+# plotDefine = datAn.definePlots(nameFile, partA, partA2, allGroups, groupNames, scale )
+# #plt.show(block = False)
+# scale =1
+# plotDefine2 = datAn.definePlots(nameFile2, partA, partA2, allGroups, groupNames, scale )
 
 
-#plt.plot(time, critMin)
-#plt.plot(time,multI)
+# scale =1
+# plotDefine2 = datAn.definePlots(nameFile3, partA, partA2, allGroups, groupNames,scale )
 
 
-# for i in range(len(data2)):
-# 	if data[i+1] > data[i]:
-# 		timeCol.append(i)
+# scale =1
+# plotDefine2 = datAn.definePlots(nameFile4, partA, partA2, allGroups, groupNames, scale )
 
-#timeColision
+
+# scale =1
+# plotDefine2 = datAn.definePlots(nameFile5, partA, partA2, allGroups, groupNames, scale)
+
+#plt.show()#block = False)
+
+
+
+
+
+
 
 
 #First Data Set

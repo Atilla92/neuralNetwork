@@ -1,7 +1,8 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 import sys
-
+import scipy 
+from scipy.stats import linregress 
 
 # Set stimulus parameters experiment
 velStim = -0.25  #m/s velocity of stimulus
@@ -98,7 +99,7 @@ def createPlot(groupNameA, inhibitoryA, excitatoryA, cellPotentialA, activityA, 
 			plt.legend()
 			showPlots = True
 		else:
-			print (nameTrue + ' is not in data list')
+			print(nameTrue + ' is not in data list')
 	if showPlots == True :
 		plt.figure()
 		plt.show(block = False)	
@@ -121,7 +122,7 @@ def plotAllData(nameFile) :
 # allGroups = False 
 # groupNames= [groupA1,groupB1]
 
-def definePlots(nameFile, partA, partA2, allGroups, groupNames, scale):
+def definePlots(nameFile, partA, partA2, allGroups, groupNames, scale, plotFile1):
 	data = importData(nameFile)
 	# print nameFile
 	lOverV, v, l, typeStim = extractValuesFileName(nameFile)
@@ -144,7 +145,10 @@ def definePlots(nameFile, partA, partA2, allGroups, groupNames, scale):
 					ID = IDLine[i]
 					IDLine2.append(ID)
 					columnGroup = data[:, i]
-					groupPlot = plt.plot(time,columnGroup, label=(str(IDLine[i])+'_v_'+str(v)+'_l_'+str(l)+'_l/v_'+str(lOverV)))
+					if plotFile1 == True:
+						groupPlot = plt.plot(time,columnGroup, label=(str(IDLine[i])+'_v_'+str(v)+'_l_'+str(l)+'_l/v_'+str(lOverV)))
+					if plotFile1 ==False:
+						groupPlot = False
 					plt.legend()
 	return groupPlot
 
@@ -183,26 +187,10 @@ def extractFiles(filePath):
 	        #print(file)
 	       	nameFiles.append(file)
 	return nameFiles
-	
-def createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale):
-	nameFiles = extractFiles(filePath)
-
-	thresholds = setThresholds(nameFiles, 'Hue', '_act_','RaAv')
-	xTime2 = []
-	print np.size(nameFiles)
-	#thresholds= [0.1, 0.1, 0.25, 0.1 , 0.2]
-	for i in range(len(nameFiles)):
-		nameFile=nameFiles[i]
-		
-		threshold = thresholds[i]
-		#threshold = 0.2
-		plotTimeCol, xTimeCol = plotTimeCollision(nameFile, 'Hue', '_act_','RaAv', threshold)
-		xTime2.append(xTimeCol)
-		plotFile = definePlots(nameFile, partA, partA2, allGroups, groupNames, scale)
-	return plotFile, plotTimeCol
 
 
-def plotTimeCollision(nameFile, groupA1, partA, partA2, threshold):
+
+def plotTimeCollision(nameFile, groupA1, partA, partA2, threshold, plotTimeCol1):
 
 	#lOverV, v, l, typeStim = extractValuesFileName(nameFile)
 	#print v
@@ -214,10 +202,15 @@ def plotTimeCollision(nameFile, groupA1, partA, partA2, threshold):
 	#print type(threshold)
 	xPos = (np.r_[True, data2[1:] < data2[:-1]] & np.r_[data2[:-1] < data2[1:], True])* (data2<threshold) * time 
 	xTimeCol= []
+
+
 	for i in np.nditer(xPos):
 		if i> 0 :
-			timeCol = plt.axvline(i, color ='r', linewidth=2.5, linestyle = '--')
-			xTimeCol.append(i)
+			xTimeCol.append(int(i))
+			if plotTimeCol1 == True:
+				timeCol = plt.axvline(i, color ='r', linewidth=2.5, linestyle = '--')
+			if plotTimeCol1 == False:
+				timeCol = False
 
 	return timeCol, xTimeCol
 
@@ -240,6 +233,115 @@ def setThresholds(nameFiles, groupA1, partA, partA2):
 		thresholds.append(threshold)
 		plotThres= True
 	return thresholds
+
+def findLGMDSpike(nameFile, plotLGMDspike):
+	data = importData(nameFile)
+	IDLine = rewriteCycleLine(nameFile)
+	time = data[:,0]
+	data3 = data[:, IDLine.index('LGMD WTA' + '_act_' + 'RaAv')]
+	threshold = 0.9
+	#xPos = (np.r_[True, data3[1:] > data3[:-1]] & np.r_[data3[:-1] > data3[1:], True])* (data3<threshold) * time 
+	xPos = (np.r_[True, data3[1:] > data3[:-1]])* (data3<threshold) * time 
+	xTimeSpike = []
+	if np.sum(xPos)>0:
+		for i in np.nditer(xPos):
+			if i> 0 :
+				xTimeSpike.append(int(i))
+				if plotLGMDspike == True: 
+					timeSpike = plt.axvline(i, color ='b', linewidth=2.5, linestyle = '--')
+				if plotLGMDspike == False :
+					timeSpike = False
+
+	elif np.sum(xPos)==0:
+		xTimeSpike = False
+		timeSpike = False
+	return timeSpike, xTimeSpike
+
+
+
+	
+def createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile1, plotTimeCol1, plotLGMDspike, plotScatter):
+	nameFiles = extractFiles(filePath)
+	#thresholds = setThresholds(nameFiles, 'Hue', '_act_','RaAv')
+	xTime2 = []
+	spikeTime = []
+	xlv = []
+	ysc = []
+	tryout = []
+	#print np.size(nameFiles)
+	thresholds= [0.1, 0.1, 0.25, 0.1 , 0.2]
+	for i in range(len(nameFiles)):
+		nameFile=nameFiles[i]
+		
+		threshold = thresholds[i]
+		#threshold = 0.2
+		
+		plotTimeCol, xTimeCol = plotTimeCollision(nameFile, 'Hue', '_act_','RaAv', threshold, plotTimeCol1)
+				
+		plotFile = definePlots(nameFile, partA, partA2, allGroups, groupNames, scale, plotFile1)
+
+		timeSpike, xTimeSpike = findLGMDSpike(nameFile, plotLGMDspike)
+		spikeTime.append(xTimeSpike)
+		lOverV, v, l, typeStim = extractValuesFileName(nameFile)
+		xloverV, ySpike2col = spike2colision(xTimeSpike, xTimeCol, lOverV) #, plotScatter)
+		
+		xTime2.extend(xTimeCol)
+		xlv.extend(xloverV)
+		ysc.extend(ySpike2col)
+		
+		#plt.scatter(xlv,ysc)
+	plotSpikeCol, plotRegression = linearRegress(xlv,ysc)
+	
+	# Plot Scatter		
+	
+
+	
+	return plotFile, plotTimeCol, xTime2, plotSpikeCol, plotRegression
+
+def linearRegress(xlv, ysc):
+	xlv= np.array(xlv)
+	ysc= np.array(ysc)
+
+	# fit = np.polyfit(xlv,ysc,1)
+	# fit_fn = np.poly1d(fit)
+	# plt.plot(xlv,ysc,'yo', xlv, fit_fn(xlv))
+
+	slope, intercept,rValue,a4,a5 =linregress(xlv,ysc)
+	fity = slope * xlv + intercept
+	
+	rValue2	="{0:.3f}".format(rValue)
+	print rValue2
+
+
+	plotSpikeCol = plt.scatter(xlv,ysc, label = 'LGMD spike')
+	plotRegression = plt.plot(xlv, fity, color = 'r', label =('linear fit r='+ rValue2))
+	plt.xlabel('l/v [-]')
+	plt.ylabel('time to collision [ms]')
+	plt.axhline(0, color ='k', linewidth=2.5, linestyle = '--')
+	plt.legend()
+
+	return plotSpikeCol, plotRegression
+
+
+def spike2colision(timeSpike, xTimeCol, lOverV):#, plotScatter):
+	x = []
+	y = []
+	# for i in range(np.size(timeSpike)):
+
+	for j in range(len(timeSpike)):
+		x.append(float(lOverV))
+		spike2col = xTimeCol[0] - timeSpike[j]
+		y.append(float(spike2col)) 
+		# if plotScatter == True:
+		# 	spike2colPlot = plt.scatter(x,y)
+		# 	plt.xlabel('l/v [-]')
+		# 	plt.ylabel('LGMD spike [ms]')
+		# if plotScatter == False :
+		# 	spike2colPlot = False 
+	return 	x,y #, spike2colPlot	
+
+
+
 
 
 
