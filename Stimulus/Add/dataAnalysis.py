@@ -208,7 +208,7 @@ def plotTimeCollision(nameFile, groupA1, partA, partA2, threshold, plotTimeCol1)
 		xPos = (np.r_[True, data2[1:] < data2[:-1]])* (data2<threshold) * time 
 
 	xTimeCol= []
-	print xPos
+
 
 
 	for i in np.nditer(xPos):
@@ -218,7 +218,6 @@ def plotTimeCollision(nameFile, groupA1, partA, partA2, threshold, plotTimeCol1)
 				timeCol = plt.axvline(i, color ='r', linewidth=2.5, linestyle = '--')
 			if plotTimeCol1 == False:
 				timeCol = False
-	print timeCol
 
 	return timeCol, xTimeCol
 
@@ -235,7 +234,8 @@ def setThresholds(nameFiles, groupA1, partA, partA2):
 		IDLine = rewriteCycleLine(nameFile)
 		time = data[:,0]
 		data2 = data[:, IDLine.index(groupA1 + partA + partA2)]
-		plt.plot(time, data2)
+		plt.plot(time, data2, label = nameFile)
+		plt.legend()
 		plt.show()
 		threshold = float(raw_input('threshold: '))
 		thresholds.append(threshold)
@@ -253,7 +253,8 @@ def setThresholdsSpike(nameFiles):
 		IDLine = rewriteCycleLine(nameFile)
 		time = data[:,0]
 		data2 = data[:, IDLine.index( 'LGMD WTA' + '_act_' + 'RaAv')]
-		plt.plot(time, data2)
+		plt.plot(time, data2, label = nameFile)
+		plt.legend()
 		plt.show()
 		threshold = float(raw_input('threshold: '))
 		thresSpike.append(threshold)
@@ -270,7 +271,6 @@ def findLGMDSpike(nameFile, plotLGMDspike, thresholdSpike):
 	#xPos = (np.r_[True, data3[1:] > data3[:-1]] & np.r_[data3[:-1] > data3[1:], True])* (data3<threshold) * time 
 	xPos = (np.r_[True, data3[1:] > data3[:-1]])* (data3>threshold) * time 
 	xTimeSpike = []
-	print xPos
 	if np.sum(xPos)>0:
 		for i in np.nditer(xPos):
 			if i> 0 :
@@ -283,14 +283,12 @@ def findLGMDSpike(nameFile, plotLGMDspike, thresholdSpike):
 	elif np.sum(xPos)==0:
 		xTimeSpike = False
 		timeSpike = False
-	print xTimeSpike
 	return timeSpike, xTimeSpike
 
 
 
 	
-def createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile1, plotTimeCol1, plotLGMDspike, plotScatter, setThresholdsMan, typeTrue, thresholdSpike):
-	
+def createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile1, plotTimeCol1, plotLGMDspike, plotScatter, setThresholdsMan, thresholdHue,  thresholdSpike,setThresholdsSpikeMan, typeTrue, setColor):
 	nameFiles1 = extractFiles(filePath)
 	nameFiles = []
 	for i in range(len(nameFiles1)):
@@ -301,40 +299,35 @@ def createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotF
 	if setThresholdsMan == True:
 		thresholds = setThresholds(nameFiles, 'Hue', '_act_','RaAv')
 	if setThresholdsMan == False :
-		thresholds= [0.1, 0.1,0.1, 0.2, 0.25 , 0.1, 0.25, 0.1]
+		thresholds= thresholdHue
+		if np.size(thresholdHue) == 1 :
+			number = len(nameFiles)
+			thresholds = np.ones(number)*thresholdHue
 
-	if thresholdSpike == True:
+	if setThresholdsSpikeMan == True:
 		thresSpike = setThresholdsSpike(nameFiles)
 	
-	if thresholdSpike == False : 
-		thresSpike = [0.019, 0.024, 0.028, 0.01, 0.038, 0.01, 0.03, 0.03]
+	if setThresholdsSpikeMan == False : 
+		thresSpike = thresholdSpike
+		if np.size(thresholdSpike) ==1 :
+			thresSpike = np.ones(len(nameFiles))*thresholdSpike
 
 	xTime2 = []
 	spikeTime = []
 	xlv = []
 	ysc = []
-	tryout = []
-	#print np.size(nameFiles)
-	
+	tryout = []	
 	for i in range(len(nameFiles)):
 		nameFile=nameFiles[i]
 		if typeTrue in nameFile:
 		
-			#threshold = thresholds[i]
-			threshold = 0.001
-			#threshold = 0.2
-			# if thresholdSpike == True:
-			# 	thresholdSpike = thresSpike[i]
-			# if thresholdSpike == False:
-			# 	thresholdSpike = 0.02
-
-			thresholdSpike = thresSpike[i]
-			
+			threshold = thresholds[i]
+			thresholdSpikes = thresSpike[i]		
 			plotTimeCol, xTimeCol = plotTimeCollision(nameFile, 'Hue', '_act_','RaAv', threshold, plotTimeCol1)
 					
 			plotFile = definePlots(nameFile, partA, partA2, allGroups, groupNames, scale, plotFile1)
 
-			timeSpike, xTimeSpike = findLGMDSpike(nameFile, plotLGMDspike, thresholdSpike)
+			timeSpike, xTimeSpike = findLGMDSpike(nameFile, plotLGMDspike, thresholdSpikes)
 			spikeTime.append(xTimeSpike)
 			lOverV, v, l, typeStim = extractValuesFileName(nameFile)
 			if xTimeSpike !=False :
@@ -346,25 +339,25 @@ def createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotF
 		
 		#plt.scatter(xlv,ysc)
 	 
-	plotSpikeCol, plotRegression = linearRegress(xlv,ysc, plotScatter)
+	plotSpikeCol, plotRegression = linearRegress(xlv,ysc, plotScatter, typeTrue, setColor)
 	
 	# Plot Scatter		
 	
 
 	
-	return plotFile, plotTimeCol, xTime2, plotSpikeCol, plotRegression
+	return plotFile, plotTimeCol, xTime2, plotSpikeCol, plotRegression, xlv, ysc
 
-def linearRegress(xlv, ysc, plotScatter):
+def linearRegress(xlv, ysc, plotScatter, typeTrue, setColor):
 	xlv= np.array(xlv)
-	ysc= np.array(ysc)
+	ysc= np.array(ysc) 
 	slope, intercept,rValue,a4,a5 =linregress(xlv,ysc)
 	fity = slope * xlv + intercept
 	rValue2	="{0:.3f}".format(rValue)
 	slope2	="{0:.3f}".format(slope)
 	intercept2	="{0:.3f}".format(intercept)
 	if plotScatter == True:
-		plotSpikeCol = plt.scatter(xlv,ysc, label = 'LGMD spike')
-		plotRegression = plt.plot(xlv, fity, color = 'r', label =('linear fit y='+slope2+'*x+'+intercept2+'  r='+ rValue2))
+		plotSpikeCol = plt.scatter(xlv,ysc, label = 'LGMD spike' + typeTrue, color = setColor)
+		plotRegression = plt.plot(xlv, fity, color = setColor, label =('linear fit ' +typeTrue+ ' y='+slope2+'*x+'+intercept2+'  r='+ rValue2))
 		plt.xlabel('l/v [-]')
 		plt.ylabel('time to collision [ms]')
 		plt.axhline(0, color ='k', linewidth=2.5, linestyle = '--')

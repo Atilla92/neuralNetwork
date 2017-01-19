@@ -4,64 +4,71 @@ import sys, math
 import matplotlib.pyplot as plt
 
 
-# Set stimulus parameters
-velStim = -0.08  #m/s velocity of stimulus
-lStim = 0.01 #m  half length of stimulus
-xStart = 0.05 #m start approach distance away from specimen 
-
-# Set locust parameters
-xFov = 180 # degrees, fov locust azimuth
-yFov = 180 # degrees, fov locust elevation
-angPix = 4.5 # deg/pixel interommatidial angle specimen
-
-#Set parameters image
-scaleCon = (0,0,0)
-backgroundColor = 255  # 0 black, 255 white 
-scaleRes = 10  # resolution scale, to downsample later
-fps = 200 # Frame Resolution
-numFrames = 10 # Number of repetition frames at end and beginning 
-
-#Configure Image 
-
-def createImage(xFov, yFov , angPix, scaleRes):
-	outHeight =int(round(yFov / angPix))
-	outWidth =int(round(xFov / angPix)) 	
-	hImage = int(round(outHeight * scaleRes)) 
-	wImage = int(round(outWidth * scaleRes))
-
-	img = np.ones((hImage,wImage,3), np.uint8)*backgroundColor
-	return img, outHeight, outWidth, hImage, wImage
 
 
-#Initiate Parameters
+velocities = [-0.05, -0.08, -0.1, -0.13, -0.15,-0.18 , -0.2, -0.25, -0.3, -0.35, -0.4]
+#velocities = [-0.15]
+for i in range(len(velocities)):
+	# Set stimulus parameters
+	velStim = velocities[i]  #m/s velocity of stimulus
+	#velStim = -0.08  #m/s velocity of stimulus
+	lStim = 0.01 #m  half length of stimulus
+	xStart = 0.05 #m start approach distance away from specimen 
 
-dt = 1./fps 
-tStart= xStart/velStim
-tEnd = 0
+	# Set locust parameters
+	xFov = 180 # degrees, fov locust azimuth
+	yFov = 180 # degrees, fov locust elevation
+	angPix = 4.5 # deg/pixel interommatidial angle specimen
+
+	#Set parameters image
+	scaleCon = (100,100,100)
+	#scaleCon = (0,0,0)
+	backgroundColor = 255  # 0 black, 255 white 
+	scaleRes = 10  # resolution scale, to downsample later
+	fps = 200 # Frame Resolution
+	numFrames = 10 # Number of repetition frames at end and beginning 
+
+	#Configure Image 
+
+	def createImage(xFov, yFov , angPix, scaleRes):
+		outHeight =int(round(yFov / angPix))
+		outWidth =int(round(xFov / angPix)) 	
+		hImage = int(round(outHeight * scaleRes)) 
+		wImage = int(round(outWidth * scaleRes))
+
+		img = np.ones((hImage,wImage,3), np.uint8)*backgroundColor
+		return img, outHeight, outWidth, hImage, wImage
 
 
-def getParamters(velStim, tStart , tEnd, dt, lStim, angPix ):
+	#Initiate Parameters
 
-	t = np.arange(tStart, tEnd, dt)
-	xRun = np.multiply(velStim,t)
-	thetaArray= np.divide(lStim , xRun)
-	thetaRun = np.multiply(2 , np.arctan(thetaArray)) # this is the whole angle
-	# lSquareRun1 = np.multiply(xStart , np.tan(np.divide(thetaRun1 , 2)))
-	lPix1 = np.divide(thetaRun, angPix) # this is the whole length
-	lPix = np.multiply(lPix1, scaleRes* 180/math.pi)
+	dt = 1./fps 
+	tStart= xStart/velStim
+	tEnd = 0
 
-	return t, lPix , thetaRun, xRun
 
-img, outHeight, outWidth, hImage, wImage = createImage(xFov, yFov, angPix, scaleRes)
-tStimulus, lStimulus, theta, xRun  = getParamters(velStim, tStart, tEnd, dt, lStim, angPix)
+	def getParamters(velStim, tStart , tEnd, dt, lStim, angPix ):
 
-# plt.plot(tStimulus, lStimulus)
-# plt.show()
-# print tStimulus
+		t = np.arange(tStart, tEnd, dt)
+		xRun = np.multiply(velStim,t)
+		thetaArray= np.divide(lStim , xRun)
+		thetaRun = np.multiply(2 , np.arctan(thetaArray)) # this is the whole angle
+		# lSquareRun1 = np.multiply(xStart , np.tan(np.divide(thetaRun1 , 2)))
+		lPix1 = np.divide(thetaRun, angPix) # this is the whole length
+		lPix = np.multiply(lPix1, scaleRes* 180/math.pi)
 
-# def writerImage(fps, outWidth. outHeight, wImage, hImage, dt, lStimulus, img)
-fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-writerOut = cv2.VideoWriter('stimCircle_fps_'+str(fps) +'_v_' +str(velStim)+'_l_'+str(lStim)+ '_x_'+ str(xStart)+ '_Sc_'+str(scaleCon)+'.avi', fourcc, fps , (outWidth, outHeight))
+		return t, lPix , thetaRun, xRun
+
+	img, outHeight, outWidth, hImage, wImage = createImage(xFov, yFov, angPix, scaleRes)
+	tStimulus, lStimulus, theta, xRun  = getParamters(velStim, tStart, tEnd, dt, lStim, angPix)
+
+	# plt.plot(tStimulus, lStimulus)
+	# plt.show()
+	# print tStimulus
+
+	# def writerImage(fps, outWidth. outHeight, wImage, hImage, dt, lStimulus, img)
+	fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
+	writerOut = cv2.VideoWriter('stimCircle_fps_'+str(fps) +'_v_' +str(velStim)+'_l_'+str(lStim)+ '_x_'+ str(xStart)+ '_Sc_'+str(scaleCon)+'.avi', fourcc, fps , (outWidth, outHeight))
 
 # Put in some frames at the beginning:
 
@@ -108,28 +115,28 @@ writerOut = cv2.VideoWriter('stimCircle_fps_'+str(fps) +'_v_' +str(velStim)+'_l_
 # 	writerOut.write(imgResize)
 
 #Position start circle
-yCenter = int(round(hImage/2))
-xCenter = int(round(wImage/2))
+	yCenter = int(round(hImage/2))
+	xCenter = int(round(wImage/2))
 
-# plt.plot(tStimulus,lStimulus)
-# plt.show()
-# Looming stimulus Circle
-for i in np.nditer(lStimulus) :
-	# xTopLeft1 = int(round(wImage/2 - (i/2)))
-	# yTopLeft1 = int(round(hImage/2 - (i /2)))
-	# xBottomRight1 = int(round(wImage/2 + (i/2)))
-	# yBottomRight1 = int(round(hImage/2 + i/ 2))
-	figureSquare1 = cv2.circle(img,(xCenter,yCenter),i,scaleCon, thickness = cv2.FILLED )
-	#cv2.imshow('figureSquare1', img)
-	imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
-	cv2.waitKey(int(math.ceil(dt)))
-	writerOut.write(imgResize)
+	# plt.plot(tStimulus,lStimulus)
+	# plt.show()
+	# Looming stimulus Circle
+	for i in np.nditer(lStimulus) :
+		# xTopLeft1 = int(round(wImage/2 - (i/2)))
+		# yTopLeft1 = int(round(hImage/2 - (i /2)))
+		# xBottomRight1 = int(round(wImage/2 + (i/2)))
+		# yBottomRight1 = int(round(hImage/2 + i/ 2))
+		figureSquare1 = cv2.circle(img,(xCenter,yCenter),int(i/2),scaleCon, thickness = cv2.FILLED )
+		#cv2.imshow('figureSquare1', img)
+		imgResize = cv2.resize(img, (outWidth, outHeight) , interpolation = cv2.INTER_AREA )
+		cv2.waitKey(int(math.ceil(dt)))
+		writerOut.write(imgResize)
 
 
 
-writerOut.release()
+	writerOut.release()
 
-cv2.destroyAllWindows()
+	cv2.destroyAllWindows()
 
 
 
