@@ -21,7 +21,7 @@ for i in range(len(velocities)):
 	angPix = 4.5 # deg/pixel interommatidial angle specimen
 
 	#Set parameters image
-	scaleCon = (100,100,100)
+	scaleCon = (0,0,0)
 	#scaleCon = (0,0,0)
 	backgroundColor = 255  # 0 black, 255 white 
 	scaleRes = 10  # resolution scale, to downsample later
