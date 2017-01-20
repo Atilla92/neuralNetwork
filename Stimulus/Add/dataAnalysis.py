@@ -256,7 +256,7 @@ def setThresholdsSpike(nameFiles):
 		plt.plot(time, data2, label = nameFile)
 		plt.legend()
 		plt.show()
-		threshold = float(raw_input('threshold: '))
+		threshold = float(raw_input('threshold spike: '))
 		thresSpike.append(threshold)
 		plotThres= True
 	return thresSpike

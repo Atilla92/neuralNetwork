@@ -140,8 +140,96 @@ typeTrue = 'Square(100)'
 plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression2, xlv3, ysc3= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter, setThresholdsMan, thresholdHue,  thresholdSpike, setThresholdsSpikeMan, typeTrue, setColor)
 
 
+plt.show()
+#plt.show()
+
+
+plotTimeCol = False
+plotFile = False
+plotLGMDspike = False
+plotScatter = True
+setThresholdsMan = False
+setThresholdsSpikeMan = False
+setColor = 'b'
+thresholdHue = [0.1, 0.1,0.1, 0.2, 0.25 , 0.1, 0.25, 0.1]
+thresholdSpike = 0.01
+typeTrue = 'square'
+plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression2, xlv2, ysc2= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter, setThresholdsMan, thresholdHue,  thresholdSpike, setThresholdsSpikeMan, typeTrue, setColor)
+
+
+
+
+plotTimeCol = False
+plotFile = False
+plotLGMDspike = False
+plotScatter = True
+setThresholdsMan = False
+setThresholdsSpikeMan = False
+setColor = 'g'
+#thresholdSpike =[0.019 , 0.024, 0.028, 0.01 , 0.038, 0.01, 0.03 , 0.03]
+thresholdHue= [0.001, 0.001, 0.1, 0.05, 0.001,0.001, 0.001, 0.05]
+thresholdSpike = [0.1, 0.1 ,0.004, 0.004, 0.1, 0.1 , 0.1, 0.004]
+
+typeTrue = 'NatSqu'
+plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression2, xlv3, ysc3= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter, setThresholdsMan, thresholdHue,  thresholdSpike, setThresholdsSpikeMan, typeTrue, setColor)
+
+
+
+
+
+
+plotTimeCol = False
+plotFile = False
+plotLGMDspike = False
+plotScatter = True
+setThresholdsMan = False
+setThresholdsSpikeMan = False
+setColor = 'm'
+#thresholdSpike =[0.019 , 0.024, 0.028, 0.01 , 0.038, 0.01, 0.03 , 0.03]
+thresholdHue= [0.1, 0.01, 0.03, 0.1, 0.1, 0.1, 0.2, 0.1 , 0.1]
+thresholdSpike = [0.004, 0.1, 0.003, 0.004, 0.004, 0.003, 0.02, 0.004, 0.02]
+
+typeTrue = 'natSqu(th=0.2)'
+plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression2, xlv3, ysc3= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter, setThresholdsMan, thresholdHue,  thresholdSpike, setThresholdsSpikeMan, typeTrue, setColor)
 
 plt.show()
+
+
+
+
+
+plotTimeCol = False
+plotFile = False
+plotLGMDspike = False
+plotScatter = True
+setThresholdsMan = False
+setThresholdsSpikeMan =False 
+setColor = 'b'
+#thresholdSpike =[0.019 , 0.024, 0.028, 0.01 , 0.038, 0.01, 0.03 , 0.03]
+thresholdHue= [0.2, 0.2, 0.5, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+thresholdSpike = [0.02,0.025,0.025,0.02,0.02,0.02,0.02,0.02,0.02]
+
+typeTrue = 'BigSqu(th=0.2)'
+plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression2, xlv3, ysc3= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter, setThresholdsMan, thresholdHue,  thresholdSpike, setThresholdsSpikeMan, typeTrue, setColor)
+
+plotTimeCol = False
+plotFile = False
+plotLGMDspike = False
+plotScatter = True
+setThresholdsMan = False
+setThresholdsSpikeMan = False
+setColor = 'r'
+#thresholdSpike =[0.019 , 0.024, 0.028, 0.01 , 0.038, 0.01, 0.03 , 0.03]
+thresholdHue= [0.2, 0.2, 0.2, 0.2, 0.2, 0.02, 0.4, 0.2, 0.2]
+thresholdSpike = [0.04]
+
+typeTrue = 'squ(th=0.2)'
+plotDefineAgain, plotTimeCol, xTime2, plotSpikeCol, plotRegression2, xlv3, ysc3= datAn.createPlotFiles(filePath, partA, partA2, allGroups, groupNames, scale, plotFile, plotTimeCol, plotLGMDspike, plotScatter, setThresholdsMan, thresholdHue,  thresholdSpike, setThresholdsSpikeMan, typeTrue, setColor)
+
+
+
+plt.show()
+
 
 # plotLGMDspike = False
 # plotTimeCol = False
